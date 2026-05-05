@@ -227,6 +227,8 @@ def train():
     # 1. Generate / load dataset
     print("\n[1/5] Generating dataset...")
     df = generate_dataset()
+    import os
+    os.makedirs("data", exist_ok=True)
     df.to_csv("data/career_dataset.csv", index=False)
     print(f"    Dataset: {len(df)} records, {len(df.columns)} columns, {df['career_label'].nunique()} careers")
 

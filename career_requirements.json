@@ -1,0 +1,137 @@
+{
+  "Software Developer": {
+    "description": "Software developers design, build, test, and maintain applications and systems software. They work across a variety of domains including web, desktop, enterprise, and embedded systems.",
+    "key_tech_skills": ["prog_skill", "web_dev_skill", "db_skill"],
+    "key_soft_skills": ["problem_solving", "teamwork", "adaptability"],
+    "primary_interests": ["interest_tech"],
+    "top_skills_label": ["Programming", "Web Development", "Database Management"],
+    "emoji": "💻",
+    "avg_salary": "₹6–18 LPA"
+  },
+  "Data Scientist": {
+    "description": "Data scientists collect, analyze, and interpret complex datasets to generate actionable business insights. They blend statistical expertise with machine learning and domain knowledge.",
+    "key_tech_skills": ["ml_skill", "data_analysis_skill", "prog_skill"],
+    "key_soft_skills": ["problem_solving", "communication", "adaptability"],
+    "primary_interests": ["interest_tech", "interest_science"],
+    "top_skills_label": ["Machine Learning", "Data Analysis", "Programming"],
+    "emoji": "📊",
+    "avg_salary": "₹8–22 LPA"
+  },
+  "AI/ML Engineer": {
+    "description": "AI/ML Engineers research, design, and deploy machine learning models and AI systems. They require strong mathematical foundations and advanced programming skills.",
+    "key_tech_skills": ["ml_skill", "prog_skill", "data_analysis_skill"],
+    "key_soft_skills": ["problem_solving", "adaptability", "teamwork"],
+    "primary_interests": ["interest_tech", "interest_science"],
+    "top_skills_label": ["Machine Learning", "Programming", "Data Analysis"],
+    "emoji": "🤖",
+    "avg_salary": "₹10–30 LPA"
+  },
+  "Cybersecurity Analyst": {
+    "description": "Cybersecurity analysts protect organizational systems and networks from cyber threats. They monitor systems, analyze vulnerabilities, and implement security protocols.",
+    "key_tech_skills": ["networking_skill", "prog_skill", "db_skill"],
+    "key_soft_skills": ["problem_solving", "adaptability", "leadership"],
+    "primary_interests": ["interest_tech"],
+    "top_skills_label": ["Networking", "Programming", "Database Management"],
+    "emoji": "🔒",
+    "avg_salary": "₹7–20 LPA"
+  },
+  "Cloud Engineer": {
+    "description": "Cloud engineers design, implement, and manage cloud infrastructure and services. They enable scalable, reliable, and cost-efficient deployment of applications.",
+    "key_tech_skills": ["cloud_skill", "networking_skill", "db_skill"],
+    "key_soft_skills": ["problem_solving", "adaptability", "teamwork"],
+    "primary_interests": ["interest_tech"],
+    "top_skills_label": ["Cloud Computing", "Networking", "Database Management"],
+    "emoji": "☁️",
+    "avg_salary": "₹9–25 LPA"
+  },
+  "Product Manager": {
+    "description": "Product managers drive the vision, strategy, and execution of products. They bridge technical teams and business stakeholders, ensuring products meet user needs and business goals.",
+    "key_tech_skills": ["data_analysis_skill", "web_dev_skill"],
+    "key_soft_skills": ["leadership", "communication", "teamwork"],
+    "primary_interests": ["interest_mgmt", "interest_tech"],
+    "top_skills_label": ["Data Analysis", "Web Development", "Communication"],
+    "emoji": "🗂️",
+    "avg_salary": "₹10–28 LPA"
+  },
+  "UX Designer": {
+    "description": "UX designers craft user experiences for digital products, combining design thinking with user research and prototyping to create intuitive, accessible interfaces.",
+    "key_tech_skills": ["web_dev_skill", "mobile_skill"],
+    "key_soft_skills": ["communication", "adaptability", "teamwork"],
+    "primary_interests": ["interest_design", "interest_tech"],
+    "top_skills_label": ["Web Development", "Mobile Development", "Communication"],
+    "emoji": "🎨",
+    "avg_salary": "₹6–18 LPA"
+  },
+  "Digital Marketer": {
+    "description": "Digital marketers plan and execute online marketing campaigns across SEO, SEM, social media, email, and content platforms to grow brand presence and drive business results.",
+    "key_tech_skills": ["web_dev_skill", "data_analysis_skill"],
+    "key_soft_skills": ["communication", "adaptability", "leadership"],
+    "primary_interests": ["interest_mgmt", "interest_design"],
+    "top_skills_label": ["Web Development", "Data Analysis", "Communication"],
+    "emoji": "📢",
+    "avg_salary": "₹4–14 LPA"
+  },
+  "Business Analyst": {
+    "description": "Business analysts bridge the gap between business needs and technology solutions. They gather requirements, model processes, and recommend data-driven improvements.",
+    "key_tech_skills": ["data_analysis_skill", "db_skill"],
+    "key_soft_skills": ["communication", "leadership", "problem_solving"],
+    "primary_interests": ["interest_mgmt", "interest_finance"],
+    "top_skills_label": ["Data Analysis", "Database Management", "Communication"],
+    "emoji": "📈",
+    "avg_salary": "₹6–18 LPA"
+  },
+  "Network Administrator": {
+    "description": "Network administrators install, configure, and maintain an organization's network infrastructure including routers, switches, firewalls, and VPNs.",
+    "key_tech_skills": ["networking_skill", "cloud_skill", "db_skill"],
+    "key_soft_skills": ["problem_solving", "adaptability", "teamwork"],
+    "primary_interests": ["interest_tech"],
+    "top_skills_label": ["Networking", "Cloud Computing", "Database Management"],
+    "emoji": "🌐",
+    "avg_salary": "₹5–14 LPA"
+  },
+  "Database Administrator": {
+    "description": "Database administrators manage, secure, and optimize databases that store critical organizational data. They ensure availability, integrity, and performance of data systems.",
+    "key_tech_skills": ["db_skill", "prog_skill", "cloud_skill"],
+    "key_soft_skills": ["problem_solving", "adaptability", "teamwork"],
+    "primary_interests": ["interest_tech"],
+    "top_skills_label": ["Database Management", "Programming", "Cloud Computing"],
+    "emoji": "🗄️",
+    "avg_salary": "₹5–16 LPA"
+  },
+  "Web Developer": {
+    "description": "Web developers design and build websites and web applications, working on frontend (UI/UX), backend (server logic), or full-stack across both layers.",
+    "key_tech_skills": ["web_dev_skill", "prog_skill", "db_skill"],
+    "key_soft_skills": ["problem_solving", "adaptability", "communication"],
+    "primary_interests": ["interest_tech", "interest_design"],
+    "top_skills_label": ["Web Development", "Programming", "Database Management"],
+    "emoji": "🌍",
+    "avg_salary": "₹4–16 LPA"
+  },
+  "Mobile App Developer": {
+    "description": "Mobile app developers build native or cross-platform applications for iOS and Android devices, creating user-friendly and performant mobile experiences.",
+    "key_tech_skills": ["mobile_skill", "prog_skill", "web_dev_skill"],
+    "key_soft_skills": ["problem_solving", "adaptability", "teamwork"],
+    "primary_interests": ["interest_tech", "interest_design"],
+    "top_skills_label": ["Mobile Development", "Programming", "Web Development"],
+    "emoji": "📱",
+    "avg_salary": "₹5–18 LPA"
+  },
+  "DevOps Engineer": {
+    "description": "DevOps engineers bridge development and operations by automating CI/CD pipelines, managing infrastructure as code, and enabling rapid, reliable software delivery.",
+    "key_tech_skills": ["cloud_skill", "networking_skill", "prog_skill"],
+    "key_soft_skills": ["problem_solving", "adaptability", "teamwork"],
+    "primary_interests": ["interest_tech"],
+    "top_skills_label": ["Cloud Computing", "Networking", "Programming"],
+    "emoji": "⚙️",
+    "avg_salary": "₹8–24 LPA"
+  },
+  "IT Consultant": {
+    "description": "IT consultants advise organizations on technology strategy, implementation, and optimization. They require broad technical knowledge combined with strong business acumen and communication.",
+    "key_tech_skills": ["cloud_skill", "networking_skill", "data_analysis_skill"],
+    "key_soft_skills": ["communication", "leadership", "adaptability"],
+    "primary_interests": ["interest_mgmt", "interest_tech"],
+    "top_skills_label": ["Cloud Computing", "Networking", "Communication"],
+    "emoji": "💼",
+    "avg_salary": "₹8–22 LPA"
+  }
+}

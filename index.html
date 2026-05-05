@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CareerAI — Amity University UP</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:#020817;color:#e2e8f0;overflow-x:hidden;cursor:none;min-height:100vh}
+
+/* ═══ CUSTOM CURSOR ═══ */
+#cur{position:fixed;width:10px;height:10px;background:#38bdf8;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen;will-change:transform}
+#cur-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(56,189,248,.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;will-change:transform}
+#cur-trail{position:fixed;pointer-events:none;z-index:99990}
+.trail-dot{position:absolute;border-radius:50%;background:#818cf8;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .5s}
+body.hov #cur{width:22px;height:22px;background:#818cf8}
+body.hov #cur-ring{width:55px;height:55px;border-color:rgba(129,140,248,.6)}
+body.clk #cur{width:6px;height:6px;background:#c084fc}
+
+/* ═══ CANVAS ═══ */
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(2,8,23,.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.06)}
+.logo{display:flex;align-items:center;gap:12px;font-size:1.1rem;font-weight:800;letter-spacing:-.5px}
+.logo-box{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#38bdf8,#818cf8);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 20px rgba(56,189,248,.4);animation:logoPulse 3s infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 20px rgba(56,189,248,.4)}50%{box-shadow:0 0 35px rgba(56,189,248,.7)}}
+.nbadge{font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid rgba(56,189,248,.3);color:#38bdf8;background:rgba(56,189,248,.07)}
+.ninfo{font-size:.78rem;color:#475569}.ninfo span{color:#38bdf8;font-weight:600}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 2rem 3rem;text-align:center}
+.hero-orb1{position:absolute;top:15%;left:10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.06),transparent 70%);animation:orbFloat1 8s ease-in-out infinite;pointer-events:none}
+.hero-orb2{position:absolute;bottom:20%;right:10%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(129,140,248,.06),transparent 70%);animation:orbFloat2 10s ease-in-out infinite;pointer-events:none}
+@keyframes orbFloat1{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+@keyframes orbFloat2{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(20px) scale(.95)}}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#38bdf8;padding:6px 18px;border-radius:999px;border:1px solid rgba(56,189,248,.2);background:rgba(56,189,248,.05);margin-bottom:2rem;animation:fadeDown .8s ease both}
+.edot{width:7px;height:7px;border-radius:50%;background:#38bdf8;animation:eDotPulse 2s infinite}
+@keyframes eDotPulse{0%,100%{box-shadow:0 0 0 0 rgba(56,189,248,.7)}70%{box-shadow:0 0 0 8px rgba(56,189,248,0)}}
+
+h1{font-size:clamp(3rem,8vw,6.2rem);font-weight:900;line-height:1.0;letter-spacing:-4px;margin-bottom:1.5rem;animation:fadeDown .9s ease .1s both}
+.g1{background:linear-gradient(135deg,#38bdf8 0%,#818cf8 50%,#c084fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 4s ease infinite alternate}
+@keyframes gradShift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(30deg)}}
+
+.hero-sub{font-size:1.07rem;color:#64748b;max-width:560px;line-height:1.8;margin-bottom:3rem;animation:fadeDown 1s ease .2s both}
+
+.cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:5rem;animation:fadeDown 1s ease .3s both}
+
+.btn-glow{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,#38bdf8,#818cf8);color:#020817;font-family:'Outfit',sans-serif;font-weight:800;font-size:.96rem;padding:.9rem 2.3rem;border-radius:999px;border:none;cursor:none;transition:all .3s;box-shadow:0 0 30px rgba(56,189,248,.3),0 0 60px rgba(56,189,248,.1);text-decoration:none;position:relative;overflow:hidden}
+.btn-glow .shine{position:absolute;top:-50%;left:-60%;width:35%;height:200%;background:rgba(255,255,255,.2);transform:skewX(-20deg);transition:left .6s}
+.btn-glow:hover .shine{left:120%}
+.btn-glow:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 50px rgba(56,189,248,.5)}
+
+.btn-out{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#94a3b8;font-family:'Outfit',sans-serif;font-weight:600;font-size:.96rem;padding:.9rem 2.3rem;border-radius:999px;border:1px solid rgba(255,255,255,.1);cursor:none;transition:all .3s;text-decoration:none}
+.btn-out:hover{border-color:#38bdf8;color:#38bdf8;transform:translateY(-2px);background:rgba(56,189,248,.05)}
+
+/* ═══ STATS ═══ */
+.stats{display:flex;gap:1px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:18px;overflow:hidden;max-width:700px;width:100%;animation:fadeUp 1s ease .4s both}
+.st{flex:1;background:#070d1a;padding:1.4rem 1rem;text-align:center;transition:all .3s;position:relative;overflow:hidden;cursor:default}
+.st::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:linear-gradient(90deg,#38bdf8,#818cf8);transition:width .4s}
+.st:hover{background:#0d1a2e}
+.st:hover::after{width:60%}
+.sn{display:block;font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:600;color:#38bdf8;margin-bottom:4px}
+.sl{font-size:.68rem;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:1px}
+
+/* ═══ FEATURES ═══ */
+.feats{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:6rem 2rem}
+.sec-lbl{text-align:center;font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#334155;margin-bottom:.8rem}
+.sec-ttl{text-align:center;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-1.5px;margin-bottom:4rem}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:20px;overflow:hidden}
+.feat{background:#070d1a;padding:2.2rem;transition:all .3s;position:relative;overflow:hidden;cursor:default}
+.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#38bdf8,#818cf8,transparent);transform:translateX(-100%);transition:transform .6s}
+.feat:hover{background:#0a1628;transform:translateY(-2px)}
+.feat:hover::before{transform:translateX(0)}
+.fnum{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;color:#334155;margin-bottom:1rem;letter-spacing:1px}
+.fico{font-size:2.2rem;margin-bottom:1rem;display:block;transition:transform .4s}
+.feat:hover .fico{transform:scale(1.2) rotate(-5deg)}
+.ft{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.fd{font-size:.82rem;color:#475569;line-height:1.7}
+
+/* ═══ FORM ═══ */
+#app-wrap{position:relative;z-index:1}
+#app{max-width:880px;margin:0 auto;padding:2rem 1.5rem 6rem}
+
+/* PROGRESS */
+.prog{display:flex;align-items:center;margin-bottom:3rem;background:#070d1a;border:1px solid rgba(255,255,255,.06);border-radius:999px;padding:6px 8px;gap:3px}
+.ps{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 10px;border-radius:999px;font-size:.75rem;font-weight:600;color:#334155;cursor:none;transition:all .25s}
+.ps.act{background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(129,140,248,.08));color:#38bdf8;border:1px solid rgba(56,189,248,.2)}
+.ps.dn{color:#4ade80}
+.pd{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:#0d1526;border:1px solid rgba(255,255,255,.07);flex-shrink:0;transition:all .3s}
+.ps.act .pd{background:#38bdf8;color:#020817;border-color:#38bdf8;box-shadow:0 0 14px rgba(56,189,248,.6)}
+.ps.dn .pd{background:#4ade80;color:#020817;border-color:#4ade80}
+
+/* SECTIONS */
+.fsec{animation:riseIn .4s ease}
+.fsec.hidden{display:none!important}
+@keyframes riseIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.sh{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.si{width:58px;height:58px;border-radius:14px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;background:#0a1225;transition:all .3s}
+.sh:hover .si{transform:rotate(-5deg) scale(1.08);border-color:rgba(56,189,248,.3)}
+.stag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#38bdf8;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.15);padding:2px 8px;border-radius:4px;margin-bottom:6px}
+.stitle{font-size:1.5rem;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.ssub{font-size:.83rem;color:#475569}
+
+/* GRID */
+.ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.2rem;margin-bottom:2.5rem}
+.f{display:flex;flex-direction:column;gap:7px}
+.f.full{grid-column:1/-1}
+.f label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:#475569;transition:color .2s}
+.f:focus-within label{color:#38bdf8}
+
+/* NUMBER INPUT */
+.iw{position:relative}
+.iw input{width:100%;background:#0a1225;border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#e2e8f0;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:500;padding:.72rem 3rem .72rem 1rem;outline:none;transition:all .25s;-moz-appearance:textfield;cursor:none}
+.iw input::-webkit-inner-spin-button{-webkit-appearance:none}
+.iw input:focus{border-color:#38bdf8;background:rgba(56,189,248,.04);box-shadow:0 0 0 3px rgba(56,189,248,.12),0 0 20px rgba(56,189,248,.05)}
+.iw input.err{border-color:#f87171;box-shadow:0 0 0 3px rgba(248,113,113,.1)}
+.sfx{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:700;color:#334155;pointer-events:none}
+.ebar{height:3px;background:rgba(255,255,255,.04);border-radius:99px;overflow:hidden;margin-top:5px}
+.efill{height:100%;border-radius:99px;background:linear-gradient(90deg,#38bdf8,#818cf8);transition:width .5s cubic-bezier(.17,.67,.3,1.3)}
+.etxt{font-size:.7rem;color:#f87171;min-height:.9rem}
+
+/* SKILL PILLS */
+.pills{display:flex;gap:5px}
+.pill{flex:1;text-align:center;padding:9px 3px;border-radius:8px;border:1px solid rgba(255,255,255,.07);font-size:.7rem;font-weight:700;color:#475569;cursor:none;transition:all .2s;background:#0a1225;user-select:none}
+.pill:hover{border-color:rgba(56,189,248,.5);color:#38bdf8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(56,189,248,.15)}
+.pill.on{background:linear-gradient(135deg,#38bdf8,#818cf8);color:#020817;border-color:transparent;box-shadow:0 4px 20px rgba(56,189,248,.35);transform:translateY(-1px)}
+
+/* STARS */
+.stars{display:flex;gap:4px;margin-top:4px}
+.star{font-size:1.7rem;cursor:none;color:rgba(255,255,255,.07);transition:all .15s;line-height:1;user-select:none}
+.star.on{color:#fbbf24;text-shadow:0 0 12px rgba(251,191,36,.5)}
+.star:hover{transform:scale(1.3) rotate(-5deg)}
+
+/* SLIDER */
+.slrow{display:flex;gap:12px;align-items:center}
+.slrow input[type=range]{flex:1;-webkit-appearance:none;height:5px;border-radius:99px;outline:none;cursor:none}
+.slrow input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#38bdf8,#818cf8);box-shadow:0 0 16px rgba(56,189,248,.6);cursor:none;transition:transform .2s}
+.slrow input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.sllbls{display:flex;justify-content:space-between;font-size:.66rem;color:#334155;margin-top:4px}
+.slval{font-family:'JetBrains Mono',monospace;font-size:.9rem;font-weight:600;color:#38bdf8;min-width:36px;text-align:right}
+
+/* INTEREST CARDS */
+.intg{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:1.5rem}
+.icard{position:relative;padding:20px 10px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:#0a1225;text-align:center;cursor:none;transition:all .25s;user-select:none;overflow:hidden}
+.icard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(129,140,248,.05));opacity:0;transition:opacity .3s}
+.icard:hover{border-color:rgba(56,189,248,.4);transform:translateY(-4px);box-shadow:0 10px 30px rgba(56,189,248,.1)}
+.icard:hover::before{opacity:1}
+.icard.sel{border-color:#38bdf8;background:rgba(56,189,248,.06);box-shadow:0 0 28px rgba(56,189,248,.15),inset 0 0 20px rgba(56,189,248,.04)}
+.icard.sel::before{opacity:1}
+.icard input{display:none}
+.iico{font-size:2.2rem;margin-bottom:8px;display:block;transition:transform .35s}
+.icard:hover .iico{transform:scale(1.2)}
+.icard.sel .iico{animation:iconPop .4s ease}
+@keyframes iconPop{0%{transform:scale(1)}40%{transform:scale(1.35) rotate(5deg)}100%{transform:scale(1)}}
+.iname{font-size:.74rem;font-weight:700;color:#475569;transition:color .2s}
+.icard.sel .iname{color:#38bdf8}
+.ichk{position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.1);background:#0a1225;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;transition:all .25s}
+.icard.sel .ichk{background:#38bdf8;border-color:#38bdf8;color:#020817;box-shadow:0 0 10px rgba(56,189,248,.5)}
+
+/* FORM BUTTONS */
+.fnav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;flex-wrap:wrap;gap:.8rem}
+.bback{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid rgba(255,255,255,.08);color:#475569;font-family:'Outfit',sans-serif;font-size:.86rem;font-weight:600;padding:.72rem 1.6rem;border-radius:999px;cursor:none;transition:all .25s}
+.bback:hover{border-color:#38bdf8;color:#38bdf8;background:rgba(56,189,248,.05)}
+.bnext{display:inline-flex;align-items:center;gap:8px;background:#0d1526;border:1px solid rgba(255,255,255,.1);color:#e2e8f0;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:700;padding:.75rem 1.8rem;border-radius:999px;cursor:none;transition:all .25s}
+.bnext:hover{border-color:#38bdf8;color:#38bdf8;background:rgba(56,189,248,.06);transform:translateX(4px)}
+.bsub{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#38bdf8,#818cf8);border:none;color:#020817;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:800;padding:.92rem 2.5rem;border-radius:999px;cursor:none;transition:all .3s;box-shadow:0 0 30px rgba(56,189,248,.25);position:relative;overflow:hidden}
+.bsub .shine{position:absolute;top:-50%;left:-60%;width:35%;height:200%;background:rgba(255,255,255,.2);transform:skewX(-20deg);transition:left .6s}
+.bsub:hover .shine{left:120%}
+.bsub:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 55px rgba(56,189,248,.45)}
+
+/* LOADER */
+.ldr{position:fixed;inset:0;z-index:9999;background:rgba(2,8,23,.97);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem}
+.ldr.hidden{display:none}
+.lring-w{position:relative;width:84px;height:84px}
+.lr1{position:absolute;inset:0;border-radius:50%;border:2px solid transparent;border-top-color:#38bdf8;animation:spin .9s linear infinite}
+.lr2{position:absolute;inset:8px;border-radius:50%;border:2px solid transparent;border-top-color:#818cf8;animation:spin .65s linear infinite reverse}
+.lr3{position:absolute;inset:16px;border-radius:50%;border:2px solid transparent;border-top-color:#c084fc;animation:spin .45s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lst{font-family:'JetBrains Mono',monospace;font-size:.87rem;color:#38bdf8;letter-spacing:1.5px;text-align:center}
+.lsb{font-size:.72rem;color:#334155;font-family:'JetBrains Mono',monospace;margin-top:4px;text-align:center}
+.ldots::after{content:'';animation:dots 1.5s steps(4) infinite}
+@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}
+
+/* RESULTS */
+#rpage{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:3rem 1.5rem 6rem}
+#rpage.hidden{display:none}
+.rtop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.06);gap:1rem;flex-wrap:wrap}
+.rtitle{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:6px}
+.rsub{font-size:.83rem;color:#475569}
+.breset{display:inline-flex;align-items:center;gap:6px;background:#0a1225;border:1px solid rgba(255,255,255,.08);color:#475569;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;padding:8px 18px;border-radius:999px;cursor:none;transition:all .25s;white-space:nowrap}
+.breset:hover{border-color:#38bdf8;color:#38bdf8;background:rgba(56,189,248,.05)}
+
+/* TOP CARD */
+.topcard{background:#070d1a;border:1px solid rgba(56,189,248,.22);border-radius:22px;padding:2.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden;animation:riseIn .5s ease}
+.topcard::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 0%,rgba(56,189,248,.08),transparent 50%),radial-gradient(ellipse at 100% 100%,rgba(129,140,248,.06),transparent 50%);pointer-events:none}
+.tcbadge{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#38bdf8;border:1px solid rgba(56,189,248,.25);background:rgba(56,189,248,.06);padding:5px 14px;border-radius:999px;margin-bottom:1.5rem}
+.tcbadge::before{content:'';width:7px;height:7px;border-radius:50%;background:#38bdf8;animation:eDotPulse 2s infinite}
+.rhead{display:flex;align-items:center;gap:1.5rem;margin-bottom:1.8rem}
+.rebox{width:70px;height:70px;border-radius:18px;background:#0a1225;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:2.2rem;flex-shrink:0;transition:all .4s}
+.topcard:hover .rebox{transform:scale(1.1) rotate(-5deg);border-color:rgba(56,189,248,.3)}
+.rname{font-size:1.6rem;font-weight:900;letter-spacing:-.5px;margin-bottom:4px}
+.rsal{font-size:.82rem;color:#4ade80;font-weight:600}
+
+/* CONFIDENCE */
+.cblk{margin-bottom:1.8rem}
+.crow{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.clbl{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#334155}
+.cnum{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:600;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ctrack{height:8px;background:rgba(255,255,255,.04);border-radius:99px;overflow:hidden;position:relative}
+.cfill{height:100%;border-radius:99px;background:linear-gradient(90deg,#38bdf8,#818cf8,#c084fc);transition:width 1.5s cubic-bezier(.17,.67,.3,1.2);position:relative;overflow:hidden}
+.cfill::after{content:'';position:absolute;top:0;right:0;width:50px;height:100%;background:rgba(255,255,255,.5);filter:blur(8px);animation:shimmer 2.5s infinite}
+@keyframes shimmer{0%,100%{opacity:0;right:100%}50%{opacity:1;right:-10%}}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1.5rem}
+.chip{font-size:.73rem;font-weight:600;padding:5px 14px;border-radius:999px;border:1px solid rgba(56,189,248,.2);color:#38bdf8;background:rgba(56,189,248,.06);transition:all .2s;cursor:default}
+.chip:hover{background:rgba(56,189,248,.14);transform:translateY(-2px);box-shadow:0 4px 12px rgba(56,189,248,.15)}
+.expl{font-size:.87rem;color:#475569;line-height:1.8;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.06)}
+.expl strong{color:#94a3b8;font-weight:600}
+
+/* OTHER CARDS */
+.ogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:18px;overflow:hidden}
+.ocard{background:#070d1a;padding:1.6rem;transition:all .25s;animation:riseIn .5s ease both;cursor:default;position:relative;overflow:hidden}
+.ocard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#38bdf8,#818cf8);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.ocard:hover{background:#0a1628}
+.ocard:hover::before{transform:scaleX(1)}
+.oh{display:flex;align-items:center;gap:12px;margin-bottom:1.2rem}
+.oemoji{font-size:1.8rem;transition:transform .3s;display:inline-block}
+.ocard:hover .oemoji{transform:scale(1.2) rotate(-5deg)}
+.oname{font-size:1rem;font-weight:700;margin-bottom:2px}
+.osal{font-size:.73rem;color:#4ade80;font-weight:600}
+.otrack{height:5px;background:rgba(255,255,255,.04);border-radius:99px;overflow:hidden;margin-bottom:7px}
+.ofill{height:100%;border-radius:99px;background:linear-gradient(90deg,#38bdf8,#818cf8);transition:width 1.5s cubic-bezier(.17,.67,.3,1.2)}
+.opct{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#334155}
+
+/* RIPPLE */
+.rpl{position:fixed;border-radius:50%;background:rgba(56,189,248,.12);transform:scale(0);animation:rplAnim .7s ease-out forwards;pointer-events:none;z-index:99990}
+@keyframes rplAnim{to{transform:scale(5);opacity:0}}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);background:#070d1a;padding:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.ftl{font-size:.92rem;font-weight:700;margin-bottom:5px}
+.fts{font-size:.74rem;color:#334155}
+.ftr{font-size:.74rem;color:#334155;text-align:right;line-height:2}
+
+@media(max-width:640px){nav{padding:0 1rem}h1{letter-spacing:-2px}.cta-group{flex-direction:column;align-items:center}.stats{flex-wrap:wrap}.st{min-width:45%}.fnav{flex-direction:column}.bsub{width:100%;justify-content:center}footer{flex-direction:column;padding:1.5rem}.ftr{text-align:left}}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- CANVAS -->
+<canvas id="cv"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-box">🎯</div>
+    CareerAI
+    <span class="nbadge">RF Model · v1.0</span>
+  </div>
+  <div class="ninfo"><span>87.5%</span> Accuracy &nbsp;·&nbsp; <span>15</span> Careers &nbsp;·&nbsp; Amity University UP</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero-sec">
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+  <div class="eyebrow"><span class="edot"></span>AI-Powered &nbsp;·&nbsp; Machine Learning &nbsp;·&nbsp; Real-Time Analysis</div>
+  <h1><span class="g1">Intelligent</span><br/><span style="color:#f1f5f9">Career Guidance</span><br/><span class="g1">for Every Student</span></h1>
+  <p class="hero-sub">A Random Forest ML model trained on 1,423 student profiles analyses your skills, academics, and personality to map your ideal career path in seconds.</p>
+  <div class="cta-group">
+    <a href="#app-sec" class="btn-glow"><span class="shine"></span>Start Assessment &nbsp;→</a>
+    <a href="#feat-sec" class="btn-out">How It Works</a>
+  </div>
+  <div class="stats">
+    <div class="st"><span class="sn" id="c1">0</span><span class="sl">Training Records</span></div>
+    <div class="st"><span class="sn" id="c2">0</span><span class="sl">Career Paths</span></div>
+    <div class="st"><span class="sn" id="c3">0</span><span class="sl">Input Attributes</span></div>
+    <div class="st"><span class="sn" id="c4">0%</span><span class="sl">Test Accuracy</span></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="feats" id="feat-sec">
+  <div class="sec-lbl">Under The Hood</div>
+  <div class="sec-ttl">How the AI Works</div>
+  <div class="feat-grid">
+    <div class="feat"><div class="fnum">01 / PROFILE</div><span class="fico">📝</span><div class="ft">Comprehensive Profiling</div><div class="fd">25+ attributes across academics, technical skills, soft skills, interests, and personality in one guided form.</div></div>
+    <div class="feat"><div class="fnum">02 / MODEL</div><span class="fico">⚡</span><div class="ft">Random Forest ML</div><div class="fd">200 decision trees evaluate your profile. Trained on 1,423 student records across 15 career categories.</div></div>
+    <div class="feat"><div class="fnum">03 / EXPLAIN</div><span class="fico">🔍</span><div class="ft">Explainable AI</div><div class="fd">Every recommendation includes a plain-language justification linking the career to your specific strengths.</div></div>
+    <div class="feat"><div class="fnum">04 / RANK</div><span class="fico">📊</span><div class="ft">Confidence Scoring</div><div class="fd">Top-5 career paths ranked by prediction probability so you clearly see which careers suit you best.</div></div>
+  </div>
+</section>
+
+<!-- FORM -->
+<div id="app-sec">
+<div id="app">
+  <div class="prog">
+    <div class="ps act" data-s="1" onclick="navTo(1)"><div class="pd">1</div><span>Academic</span></div>
+    <div class="ps" data-s="2" onclick="navTo(2)"><div class="pd">2</div><span>Technical</span></div>
+    <div class="ps" data-s="3" onclick="navTo(3)"><div class="pd">3</div><span>Soft Skills</span></div>
+    <div class="ps" data-s="4" onclick="navTo(4)"><div class="pd">4</div><span>Interests</span></div>
+  </div>
+
+  <form id="frm" novalidate>
+    <!-- SEC 1 -->
+    <div class="fsec" id="s1">
+      <div class="sh"><div class="si">📚</div><div><div class="stag">SECTION A · 4 FIELDS</div><div class="stitle">Academic Performance</div><div class="ssub">Enter your percentage marks (0–100) for each subject.</div></div></div>
+      <div class="ig">
+        <div class="f"><label>Mathematics *</label><div class="iw"><input type="number" id="math_score" min="0" max="100" placeholder="e.g. 85"/><span class="sfx">/100</span></div><div class="ebar"><div class="efill" id="bm" style="width:0%"></div></div><span class="etxt" id="em"></span></div>
+        <div class="f"><label>Science *</label><div class="iw"><input type="number" id="science_score" min="0" max="100" placeholder="e.g. 78"/><span class="sfx">/100</span></div><div class="ebar"><div class="efill" id="bs" style="width:0%"></div></div><span class="etxt" id="es"></span></div>
+        <div class="f"><label>English *</label><div class="iw"><input type="number" id="english_score" min="0" max="100" placeholder="e.g. 72"/><span class="sfx">/100</span></div><div class="ebar"><div class="efill" id="be" style="width:0%"></div></div><span class="etxt" id="ee"></span></div>
+        <div class="f"><label>Computer Science *</label><div class="iw"><input type="number" id="cs_score" min="0" max="100" placeholder="e.g. 90"/><span class="sfx">/100</span></div><div class="ebar"><div class="efill" id="bc" style="width:0%"></div></div><span class="etxt" id="ec"></span></div>
+      </div>
+      <div class="fnav"><div></div><button type="button" class="bnext" onclick="goNext(1)">Technical Skills &nbsp;→</button></div>
+    </div>
+
+    <!-- SEC 2 -->
+    <div class="fsec hidden" id="s2">
+      <div class="sh"><div class="si">⚙️</div><div><div class="stag">SECTION B · 8 FIELDS</div><div class="stitle">Technical Skills</div><div class="ssub">Click a level to select your proficiency for each skill.</div></div></div>
+      <div class="ig">
+        <div class="f"><label>🖥️ Programming</label><div class="pills" data-field="prog_skill"><div class="pill" data-v="0">None</div><div class="pill on" data-v="1">Beginner</div><div class="pill" data-v="2">Inter.</div><div class="pill" data-v="3">Advanced</div></div><input type="hidden" id="prog_skill" value="1"/></div>
+        <div class="f"><label>🌐 Web Dev</label><div class="pills" data-field="web_dev_skill"><div class="pill" data-v="0">None</div><div class="pill on" data-v="1">Beginner</div><div class="pill" data-v="2">Inter.</div><div class="pill" data-v="3">Advanced</div></div><input type="hidden" id="web_dev_skill" value="1"/></div>
+        <div class="f"><label>🗄️ Database</label><div class="pills" data-field="db_skill"><div class="pill" data-v="0">None</div><div class="pill on" data-v="1">Beginner</div><div class="pill" data-v="2">Inter.</div><div class="pill" data-v="3">Advanced</div></div><input type="hidden" id="db_skill" value="1"/></div>
+        <div class="f"><label>📡 Networking</label><div class="pills" data-field="networking_skill"><div class="pill" data-v="0">None</div><div class="pill on" data-v="1">Beginner</div><div class="pill" data-v="2">Inter.</div><div class="pill" data-v="3">Advanced</div></div><input type="hidden" id="networking_skill" value="1"/></div>
+        <div class="f"><label>🤖 Machine Learning</label><div class="pills" data-field="ml_skill"><div class="pill" data-v="0">None</div><div class="pill on" data-v="1">Beginner</div><div class="pill" data-v="2">Inter.</div><div class="pill" data-v="3">Advanced</div></div><input type="hidden" id="ml_skill" value="1"/></div>
+        <div class="f"><label>📱 Mobile Dev</label><div class="pills" data-field="mobile_skill"><div class="pill" data-v="0">None</div><div class="pill on" data-v="1">Beginner</div><div class="pill" data-v="2">Inter.</div><div class="pill" data-v="3">Advanced</div></div><input type="hidden" id="mobile_skill" value="1"/></div>
+        <div class="f"><label>☁️ Cloud</label><div class="pills" data-field="cloud_skill"><div class="pill" data-v="0">None</div><div class="pill on" data-v="1">Beginner</div><div class="pill" data-v="2">Inter.</div><div class="pill" data-v="3">Advanced</div></div><input type="hidden" id="cloud_skill" value="1"/></div>
+        <div class="f"><label>📊 Data Analysis</label><div class="pills" data-field="data_analysis_skill"><div class="pill" data-v="0">None</div><div class="pill on" data-v="1">Beginner</div><div class="pill" data-v="2">Inter.</div><div class="pill" data-v="3">Advanced</div></div><input type="hidden" id="data_analysis_skill" value="1"/></div>
+      </div>
+      <div class="fnav"><button type="button" class="bback" onclick="goBack(2)">← Back</button><button type="button" class="bnext" onclick="goNext(2)">Soft Skills &nbsp;→</button></div>
+    </div>
+
+    <!-- SEC 3 -->
+    <div class="fsec hidden" id="s3">
+      <div class="sh"><div class="si">🧠</div><div><div class="stag">SECTION C · 6 FIELDS</div><div class="stitle">Soft Skills & Personality</div><div class="ssub">Click the stars to rate yourself (1 = Low, 5 = High).</div></div></div>
+      <div class="ig">
+        <div class="f"><label>💬 Communication</label><div class="stars" data-field="communication"><span class="star on" data-v="1">★</span><span class="star on" data-v="2">★</span><span class="star on" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div><input type="hidden" id="communication" value="3"/></div>
+        <div class="f"><label>🤝 Teamwork</label><div class="stars" data-field="teamwork"><span class="star on" data-v="1">★</span><span class="star on" data-v="2">★</span><span class="star on" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div><input type="hidden" id="teamwork" value="3"/></div>
+        <div class="f"><label>👑 Leadership</label><div class="stars" data-field="leadership"><span class="star on" data-v="1">★</span><span class="star on" data-v="2">★</span><span class="star on" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div><input type="hidden" id="leadership" value="3"/></div>
+        <div class="f"><label>🌀 Adaptability</label><div class="stars" data-field="adaptability"><span class="star on" data-v="1">★</span><span class="star on" data-v="2">★</span><span class="star on" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div><input type="hidden" id="adaptability" value="3"/></div>
+        <div class="f"><label>🔧 Problem-Solving</label><div class="stars" data-field="problem_solving"><span class="star on" data-v="1">★</span><span class="star on" data-v="2">★</span><span class="star on" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div><input type="hidden" id="problem_solving" value="3"/></div>
+        <div class="f full"><label>🎭 Personality Orientation</label><div class="slrow"><input type="range" id="personality_score" min="0" max="1" step="0.01" value="0.5"/><span class="slval" id="pval">0.50</span></div><div class="sllbls"><span>Introverted / Analytical</span><span>Extroverted / Creative</span></div></div>
+      </div>
+      <div class="fnav"><button type="button" class="bback" onclick="goBack(3)">← Back</button><button type="button" class="bnext" onclick="goNext(3)">Interests &nbsp;→</button></div>
+    </div>
+
+    <!-- SEC 4 -->
+    <div class="fsec hidden" id="s4">
+      <div class="sh"><div class="si">💡</div><div><div class="stag">SECTION D · SELECT ALL THAT APPLY</div><div class="stitle">Interests & Preferences</div><div class="ssub">Click every domain that genuinely excites you. At least one required.</div></div></div>
+      <div class="intg">
+        <label class="icard" onclick="toggleInt(this,'interest_tech')"><input type="checkbox" id="interest_tech"/><span class="ichk">✓</span><span class="iico">💻</span><span class="iname">Technology</span></label>
+        <label class="icard" onclick="toggleInt(this,'interest_mgmt')"><input type="checkbox" id="interest_mgmt"/><span class="ichk">✓</span><span class="iico">📈</span><span class="iname">Management</span></label>
+        <label class="icard" onclick="toggleInt(this,'interest_science')"><input type="checkbox" id="interest_science"/><span class="ichk">✓</span><span class="iico">🔬</span><span class="iname">Science</span></label>
+        <label class="icard" onclick="toggleInt(this,'interest_design')"><input type="checkbox" id="interest_design"/><span class="ichk">✓</span><span class="iico">🎨</span><span class="iname">Design</span></label>
+        <label class="icard" onclick="toggleInt(this,'interest_health')"><input type="checkbox" id="interest_health"/><span class="ichk">✓</span><span class="iico">🏥</span><span class="iname">Healthcare</span></label>
+        <label class="icard" onclick="toggleInt(this,'interest_finance')"><input type="checkbox" id="interest_finance"/><span class="ichk">✓</span><span class="iico">💰</span><span class="iname">Finance</span></label>
+        <label class="icard" onclick="toggleInt(this,'interest_edu')"><input type="checkbox" id="interest_edu"/><span class="ichk">✓</span><span class="iico">📚</span><span class="iname">Education</span></label>
+      </div>
+      <span class="etxt" id="eint"></span>
+      <div class="fnav"><button type="button" class="bback" onclick="goBack(4)">← Back</button><button type="submit" class="bsub"><span class="shine"></span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Analyse My Profile</button></div>
+    </div>
+  </form>
+</div>
+</div>
+
+<!-- LOADER -->
+<div class="ldr hidden" id="ldr">
+  <div class="lring-w"><div class="lr1"></div><div class="lr2"></div><div class="lr3"></div></div>
+  <div><div class="lst">Analysing profile<span class="ldots"></span></div><div class="lsb">Random Forest · 200 Trees · 15 Careers</div></div>
+</div>
+
+<!-- RESULTS -->
+<div id="rpage" class="hidden">
+  <div class="rtop">
+    <div><div class="rtitle">Your Career <span class="g1">Map</span></div><div class="rsub">AI-generated recommendations based on your unique profile.</div></div>
+    <button class="breset" onclick="resetAll()">← New Assessment</button>
+  </div>
+  <div id="topslot"></div>
+  <div id="otherslot" style="margin-top:1.5rem"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div><div class="ftl">🎯 CareerAI — AI-Based Career Recommendation System</div><div class="fts">Major Project (ETMJ100) · Batch 2022–2026 · Amity University Uttar Pradesh</div></div>
+  <div class="ftr">Harsh Sharma · A41105222189 · B.Tech CSE<br/>Guide: Mr. Bhanu Prakash Lohani · ASET, AUUP</div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// CURSOR
+// ══════════════════════════════════════════════════════════
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function animRing(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=Math.round(rx)+'px';ring.style.top=Math.round(ry)+'px';requestAnimationFrame(animRing)})();
+function addHov(sel){document.querySelectorAll(sel).forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'))})}
+addHov('button,a,.pill,.icard,.stat,.feat,.ps,.star,.chip,.ocard,.breset,.st,.btn-glow,.btn-out');
+document.addEventListener('mousedown',()=>document.body.classList.add('clk'));
+document.addEventListener('mouseup',()=>document.body.classList.remove('clk'));
+document.addEventListener('click',e=>{const r=document.createElement('div');r.className='rpl';const s=80;Object.assign(r.style,{left:e.clientX-s/2+'px',top:e.clientY-s/2+'px',width:s+'px',height:s+'px'});document.body.appendChild(r);setTimeout(()=>r.remove(),800)});
+
+// ══════════════════════════════════════════════════════════
+// PARTICLE CANVAS — particles follow mouse
+// ══════════════════════════════════════════════════════════
+(function(){
+  const c=document.getElementById('cv'),ctx=c.getContext('2d');
+  let W,H,pts=[];
+  const resize=()=>{W=c.width=window.innerWidth;H=c.height=window.innerHeight};
+  const init=()=>{pts=[];const n=Math.min(70,Math.floor(W*H/14000));for(let i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.6+.4,a:Math.random()*.5+.08,col:['#38bdf8','#818cf8','#c084fc'][Math.floor(Math.random()*3)]})};
+  const draw=()=>{
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      // attract to mouse
+      const dx=mx-p.x,dy=my-p.y,dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<150){const f=.018*(1-dist/150);p.vx+=dx*f;p.vy+=dy*f}
+      p.vx*=.98;p.vy*=.98;
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+    });
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<130){ctx.beginPath();ctx.strokeStyle=`rgba(56,189,248,${.09*(1-d/130)})`;ctx.lineWidth=.6;ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke()}
+    }
+    pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=p.a;ctx.fill();ctx.globalAlpha=1});
+    requestAnimationFrame(draw);
+  };
+  window.addEventListener('resize',()=>{resize();init()});
+  resize();init();draw();
+})();
+
+// ══════════════════════════════════════════════════════════
+// COUNTER ANIMATIONS
+// ══════════════════════════════════════════════════════════
+function animCnt(id,target,sfx,dur){
+  const el=document.getElementById(id);let s=null;
+  (function step(ts){if(!s)s=ts;const p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);
+  el.textContent=Math.round(e*target)+sfx;if(p<1)requestAnimationFrame(step)})(performance.now());
+}
+setTimeout(()=>{animCnt('c1',1423,'',2200);animCnt('c2',15,'',1600);animCnt('c3',25,'+',1900);animCnt('c4',87,'%',2400)},600);
+
+// ══════════════════════════════════════════════════════════
+// FORM NAVIGATION
+// ══════════════════════════════════════════════════════════
+let step=1;
+function upProg(s){
+  document.querySelectorAll('.ps').forEach(el=>{
+    const n=parseInt(el.dataset.s);
+    el.classList.remove('act','dn');
+    if(n===s)el.classList.add('act');
+    else if(n<s)el.classList.add('dn');
+    el.querySelector('.pd').textContent=n<s?'✓':n;
+  });
+}
+function showSec(n){
+  document.querySelectorAll('.fsec').forEach(s=>s.classList.add('hidden'));
+  document.getElementById('s'+n).classList.remove('hidden');
+  step=n;upProg(n);
+  document.getElementById('app-sec').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function navTo(n){if(n<=step)showSec(n)}
+function goBack(f){showSec(f-1)}
+function goNext(f){if(!validate(f))return;showSec(f+1)}
+
+// ══════════════════════════════════════════════════════════
+// VALIDATION
+// ══════════════════════════════════════════════════════════
+function validate(s){
+  if(s===1){
+    const flds=[['math_score','em','bm'],['science_score','es','bs'],['english_score','ee','be'],['cs_score','ec','bc']];
+    let ok=true;
+    flds.forEach(([id,eid])=>{
+      const el=document.getElementById(id),v=parseFloat(el.value),err=document.getElementById(eid);
+      if(el.value===''||isNaN(v)||v<0||v>100){err.textContent='Enter a value between 0 and 100';el.classList.add('err');ok=false}
+      else{err.textContent='';el.classList.remove('err')}
+    });return ok;
+  }
+  if(s===4){
+    const ids=['interest_tech','interest_mgmt','interest_science','interest_design','interest_health','interest_finance','interest_edu'];
+    if(!ids.some(id=>document.getElementById(id).checked)){document.getElementById('eint').textContent='Please select at least one area of interest.';return false}
+    document.getElementById('eint').textContent='';
+  }
+  return true;
+}
+
+// ══════════════════════════════════════════════════════════
+// SCORE BARS
+// ══════════════════════════════════════════════════════════
+[['math_score','bm'],['science_score','bs'],['english_score','be'],['cs_score','bc']].forEach(([id,bid])=>{
+  document.getElementById(id).addEventListener('input',function(){
+    document.getElementById(bid).style.width=Math.min(100,Math.max(0,parseFloat(this.value)||0))+'%';
+  });
+});
+
+// ══════════════════════════════════════════════════════════
+// SKILL PILLS
+// ══════════════════════════════════════════════════════════
+document.querySelectorAll('.pills').forEach(wrap=>{
+  const f=wrap.dataset.field;
+  wrap.querySelectorAll('.pill').forEach(p=>{
+    p.addEventListener('click',()=>{
+      wrap.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));
+      p.classList.add('on');
+      document.getElementById(f).value=p.dataset.v;
+    });
+  });
+});
+
+// ══════════════════════════════════════════════════════════
+// STAR RATINGS
+// ══════════════════════════════════════════════════════════
+document.querySelectorAll('.stars').forEach(wrap=>{
+  const f=wrap.dataset.field,stars=[...wrap.querySelectorAll('.star')];
+  stars.forEach(s=>{
+    s.addEventListener('click',()=>{
+      const v=parseInt(s.dataset.v);
+      document.getElementById(f).value=v;
+      stars.forEach((st,i)=>st.classList.toggle('on',i<v));
+    });
+    s.addEventListener('mouseenter',()=>{
+      const v=parseInt(s.dataset.v);
+      stars.forEach((st,i)=>{st.style.transform=i<v?'scale(1.3) rotate(-8deg)':'scale(1)';st.style.color=i<v?'#fbbf24':'rgba(255,255,255,.07)'});
+    });
+    s.addEventListener('mouseleave',()=>{
+      stars.forEach((st,i)=>{st.style.transform='scale(1)';st.style.color=st.classList.contains('on')?'#fbbf24':'rgba(255,255,255,.07)'});
+    });
+  });
+});
+
+// ══════════════════════════════════════════════════════════
+// SLIDER
+// ══════════════════════════════════════════════════════════
+(function(){
+  const sl=document.getElementById('personality_score'),dv=document.getElementById('pval');
+  function upd(){const v=parseFloat(sl.value);dv.textContent=v.toFixed(2);sl.style.background=`linear-gradient(to right,#38bdf8 ${v*100}%,rgba(255,255,255,.06) ${v*100}%)`}
+  sl.addEventListener('input',upd);upd();
+})();
+
+// ══════════════════════════════════════════════════════════
+// INTEREST TOGGLE
+// ══════════════════════════════════════════════════════════
+function toggleInt(label,id){
+  const cb=document.getElementById(id);
+  setTimeout(()=>{
+    label.classList.toggle('sel',cb.checked);
+    addHov('.icard');
+  },0);
+}
+
+// ══════════════════════════════════════════════════════════
+// FORM SUBMIT
+// ══════════════════════════════════════════════════════════
+document.getElementById('frm').addEventListener('submit',async function(e){
+  e.preventDefault();if(!validate(4))return;
+  const p={};
+  ['math_score','science_score','english_score','cs_score'].forEach(id=>p[id]=parseFloat(document.getElementById(id).value));
+  ['prog_skill','web_dev_skill','db_skill','networking_skill','ml_skill','mobile_skill','cloud_skill','data_analysis_skill'].forEach(id=>p[id]=parseInt(document.getElementById(id).value));
+  ['communication','teamwork','leadership','adaptability','problem_solving'].forEach(id=>p[id]=parseInt(document.getElementById(id).value));
+  ['interest_tech','interest_mgmt','interest_science','interest_design','interest_health','interest_finance','interest_edu'].forEach(id=>p[id]=document.getElementById(id).checked?1:0);
+  p.personality_score=parseFloat(document.getElementById('personality_score').value);
+
+  document.getElementById('ldr').classList.remove('hidden');
+  document.getElementById('app-sec').style.opacity='.08';
+  document.getElementById('rpage').classList.add('hidden');
+
+  try{
+    const res=await fetch('/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});
+    const data=await res.json();
+    if(!res.ok||data.error){alert('Error: '+(data.error||'Unknown error'));return}
+    renderResults(data.recommendations);
+  }catch(err){alert('Cannot connect. Make sure app.py is running!');console.error(err)}
+  finally{document.getElementById('ldr').classList.add('hidden');document.getElementById('app-sec').style.opacity='1'}
+});
+
+// ══════════════════════════════════════════════════════════
+// RENDER RESULTS
+// ══════════════════════════════════════════════════════════
+function renderResults(recs){
+  const top=recs[0];
+  const chips=(top.top_skills||[]).map(s=>`<span class="chip">${s}</span>`).join('');
+  document.getElementById('topslot').innerHTML=`
+    <div class="topcard">
+      <div class="tcbadge">AI Recommendation &nbsp;·&nbsp; #1 Top Match</div>
+      <div class="rhead">
+        <div class="rebox">${top.emoji||'🎯'}</div>
+        <div><div class="rname">${top.career}</div><div class="rsal">Avg. Salary: ${top.avg_salary||'N/A'}</div></div>
+      </div>
+      <div class="cblk">
+        <div class="crow"><span class="clbl">Match Confidence</span><span class="cnum" id="tpct">0%</span></div>
+        <div class="ctrack"><div class="cfill" id="tbar" style="width:0%"></div></div>
+      </div>
+      <div class="chips">${chips}</div>
+      <div class="expl">${top.explanation}</div>
+    </div>`;
+
+  document.getElementById('otherslot').innerHTML=`
+    <div class="ogrid">
+      ${recs.slice(1).map((r,i)=>`
+        <div class="ocard" style="animation-delay:${(i+1)*100}ms">
+          <div class="oh"><span class="oemoji">${r.emoji||'🎯'}</span><div><div class="oname">${r.career}</div><div class="osal">${r.avg_salary||''}</div></div></div>
+          <div class="otrack"><div class="ofill" data-t="${r.confidence}" style="width:0%"></div></div>
+          <div class="opct">${r.confidence}% match</div>
+        </div>`).join('')}
+    </div>`;
+
+  ['hero-sec','feat-sec','app-sec'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById('rpage').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  setTimeout(()=>{
+    document.getElementById('tbar').style.width=top.confidence+'%';
+    document.getElementById('tpct').textContent=top.confidence+'%';
+    document.querySelectorAll('.ofill').forEach(el=>el.style.width=parseFloat(el.dataset.t)+'%');
+  },200);
+
+  addHov('.chip,.ocard,.breset,.topcard');
+}
+
+// ══════════════════════════════════════════════════════════
+// RESET
+// ══════════════════════════════════════════════════════════
+function resetAll(){
+  document.getElementById('frm').reset();
+  document.getElementById('rpage').classList.add('hidden');
+  ['hero-sec','feat-sec','app-sec'].forEach(id=>document.getElementById(id).classList.remove('hidden'));
+  document.querySelectorAll('.pills').forEach(w=>{w.querySelectorAll('.pill').forEach((p,i)=>p.classList.toggle('on',i===1));document.getElementById(w.dataset.field).value=1});
+  document.querySelectorAll('.stars').forEach(w=>{document.getElementById(w.dataset.field).value=3;w.querySelectorAll('.star').forEach((s,i)=>{s.classList.toggle('on',i<3);s.style.color=i<3?'#fbbf24':'rgba(255,255,255,.07)'})});
+  document.querySelectorAll('.icard').forEach(c=>c.classList.remove('sel'));
+  const sl=document.getElementById('personality_score');sl.value=0.5;document.getElementById('pval').textContent='0.50';sl.style.background='linear-gradient(to right,#38bdf8 50%,rgba(255,255,255,.06) 50%)';
+  ['bm','bs','be','bc'].forEach(id=>document.getElementById(id).style.width='0%');
+  showSec(1);window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

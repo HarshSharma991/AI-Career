@@ -8,7 +8,7 @@ import json
 import os
 from flask import Flask, request, jsonify, render_template
 
-from utils.preprocessor import InputPreprocessor
+from preprocessor import InputPreprocessor
 from utils.recommender import CareerRecommender
 from utils.explainer import ExplanationGenerator
 

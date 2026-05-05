@@ -9,8 +9,8 @@ import os
 from flask import Flask, request, jsonify, render_template
 
 from preprocessor import InputPreprocessor
-from utils.recommender import CareerRecommender
-from utils.explainer import ExplanationGenerator
+from recommender import CareerRecommender
+from explainer import ExplanationGenerator
 
 app = Flask(__name__)
 

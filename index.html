@@ -547,6 +547,7 @@ function validate(s){
 // ══════════════════════════════════════════════════════════
 document.querySelectorAll('.pills').forEach(wrap=>{
   const f=wrap.dataset.field;
+  if(!f)return;
   wrap.querySelectorAll('.pill').forEach(p=>{
     p.addEventListener('click',()=>{
       wrap.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));

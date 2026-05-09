@@ -673,11 +673,28 @@ function resetAll(){
   document.getElementById('frm').reset();
   document.getElementById('rpage').classList.add('hidden');
   ['hero-sec','feat-sec','app-sec'].forEach(id=>document.getElementById(id).classList.remove('hidden'));
-  document.querySelectorAll('.pills').forEach(w=>{w.querySelectorAll('.pill').forEach((p,i)=>p.classList.toggle('on',i===1));document.getElementById(w.dataset.field).value=1});
+
+  // Pills reset — edu-path-pills skip karo (no data-field)
+  document.querySelectorAll('.pills').forEach(w=>{
+    if(!w.dataset.field)return;
+    w.querySelectorAll('.pill').forEach((p,i)=>p.classList.toggle('on',i===1));
+    document.getElementById(w.dataset.field).value=1;
+  });
+
   document.querySelectorAll('.stars').forEach(w=>{document.getElementById(w.dataset.field).value=3;w.querySelectorAll('.star').forEach((s,i)=>{s.classList.toggle('on',i<3);s.style.color=i<3?'#fbbf24':'rgba(255,255,255,.07)'})});
   document.querySelectorAll('.icard').forEach(c=>c.classList.remove('sel'));
   const sl=document.getElementById('personality_score');sl.value=0.5;document.getElementById('pval').textContent='0.50';sl.style.background='linear-gradient(to right,#38bdf8 50%,rgba(255,255,255,.06) 50%)';
   ['bm','bs','be','bc'].forEach(id=>document.getElementById(id).style.width='0%');
+
+  // Education path reset
+  document.getElementById('edu_path').value='';
+  document.querySelectorAll('#edu-path-pills .pill').forEach(p=>p.classList.remove('on'));
+  document.getElementById('diploma-branch-wrap').style.display='none';
+  document.getElementById('stream-wrap').style.display='none';
+  document.getElementById('marks-grid').style.display='none';
+  document.getElementById('marks-grid').innerHTML='';
+  document.getElementById('e_edupath').textContent='';
+
   showSec(1);window.scrollTo({top:0,behavior:'smooth'});
 }
   var SUBJECT_MAP={

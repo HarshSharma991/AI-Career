@@ -515,13 +515,18 @@ function goNext(f){if(!validate(f))return;showSec(f+1)}
 // ══════════════════════════════════════════════════════════
 function validate(s){
   if(s===1){
-    const flds=[['math_score','em','bm'],['science_score','es','bs'],['english_score','ee','be'],['cs_score','ec','bc']];
+    const ep=document.getElementById('edu_path').value;
+    if(!ep){document.getElementById('e_edupath').textContent='Please select your education path.';return false;}
+    document.getElementById('e_edupath').textContent='';
+    if(ep==='diploma'){const db=document.getElementById('diploma_branch').value;if(!db){document.getElementById('e_dipbranch').textContent='Please select your diploma branch.';return false;}document.getElementById('e_dipbranch').textContent='';}
+    if(ep==='12th'){const st=document.getElementById('stream_type').value;if(!st){document.getElementById('e_stream').textContent='Please select your stream.';return false;}document.getElementById('e_stream').textContent='';}
     let ok=true;
-    flds.forEach(([id,eid])=>{
-      const el=document.getElementById(id),v=parseFloat(el.value),err=document.getElementById(eid);
-      if(el.value===''||isNaN(v)||v<0||v>100){err.textContent='Enter a value between 0 and 100';el.classList.add('err');ok=false}
-      else{err.textContent='';el.classList.remove('err')}
-    });return ok;
+    document.querySelectorAll('#marks-grid input[type="number"]').forEach(inp=>{
+      const v=parseFloat(inp.value);
+      if(inp.value===''||isNaN(v)||v<0||v>100){inp.classList.add('err');ok=false;}
+      else{inp.classList.remove('err');}
+    });
+    return ok;
   }
   if(s===4){
     const ids=['interest_tech','interest_mgmt','interest_science','interest_design','interest_health','interest_finance','interest_edu'];
@@ -534,11 +539,7 @@ function validate(s){
 // ══════════════════════════════════════════════════════════
 // SCORE BARS
 // ══════════════════════════════════════════════════════════
-[['math_score','bm'],['science_score','bs'],['english_score','be'],['cs_score','bc']].forEach(([id,bid])=>{
-  document.getElementById(id).addEventListener('input',function(){
-    document.getElementById(bid).style.width=Math.min(100,Math.max(0,parseFloat(this.value)||0))+'%';
-  });
-});
+// Score bars handled dynamically via syncBar() in updateSubjects()
 
 // ══════════════════════════════════════════════════════════
 // SKILL PILLS

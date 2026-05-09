@@ -679,6 +679,44 @@ function resetAll(){
   ['bm','bs','be','bc'].forEach(id=>document.getElementById(id).style.width='0%');
   showSec(1);window.scrollTo({top:0,behavior:'smooth'});
 }
+  var SUBJECT_MAP={
+  diploma_cs:[['Mathematics','math_score','bm'],['Physics','science_score','bs'],['Programming','cs_score','bc'],['English','english_score','be']],
+  diploma_it:[['Mathematics','math_score','bm'],['Physics','science_score','bs'],['Programming','cs_score','bc'],['English','english_score','be']],
+  diploma_civil:[['Mathematics','math_score','bm'],['Physics','science_score','bs'],['Drawing/Design','cs_score','bc'],['English','english_score','be']],
+  diploma_mechanical:[['Mathematics','math_score','bm'],['Physics','science_score','bs'],['Workshop Tech','cs_score','bc'],['English','english_score','be']],
+  diploma_electrical:[['Mathematics','math_score','bm'],['Physics','science_score','bs'],['Electrical Tech','cs_score','bc'],['English','english_score','be']],
+  diploma_electronics:[['Mathematics','math_score','bm'],['Physics','science_score','bs'],['Electronics','cs_score','bc'],['English','english_score','be']],
+  science_pcm:[['Physics','science_score','bs'],['Chemistry','cs_score','bc'],['Mathematics','math_score','bm'],['English','english_score','be']],
+  science_pcb:[['Physics','science_score','bs'],['Chemistry','cs_score','bc'],['Biology','math_score','bm'],['English','english_score','be']],
+  commerce:[['Accountancy','math_score','bm'],['Business Studies','science_score','bs'],['Economics','cs_score','bc'],['English','english_score','be']],
+  arts:[['History/Pol.Sci','math_score','bm'],['Geography/Psych','science_score','bs'],['Sociology','cs_score','bc'],['English','english_score','be']]
+};
+function selectEduPath(val,el){
+  document.querySelectorAll('#edu-path-pills .pill').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('edu_path').value=val;
+  document.getElementById('e_edupath').textContent='';
+  document.getElementById('diploma-branch-wrap').style.display=val==='diploma'?'block':'none';
+  document.getElementById('stream-wrap').style.display=val==='12th'?'block':'none';
+  document.getElementById('diploma_branch').value='';
+  document.getElementById('stream_type').value='';
+  document.getElementById('marks-grid').style.display='none';
+  document.getElementById('marks-grid').innerHTML='';
+}
+function updateSubjects(){
+  const path=document.getElementById('edu_path').value;
+  const branch=document.getElementById('diploma_branch').value;
+  const stream=document.getElementById('stream_type').value;
+  let key=path==='diploma'&&branch?'diploma_'+branch:path==='12th'&&stream?stream:'';
+  const grid=document.getElementById('marks-grid');
+  if(!key){grid.style.display='none';grid.innerHTML='';return;}
+  const subs=SUBJECT_MAP[key]||[];
+  grid.innerHTML='';
+  subs.forEach(([lbl,fid,bid])=>{
+    grid.innerHTML+=`<div class="f"><label>${lbl} *</label><div class="iw"><input type="number" id="${fid}" min="0" max="100" placeholder="e.g. 75" oninput="document.getElementById('${bid}').style.width=Math.min(100,parseFloat(this.value)||0)+'%'"/><span class="sfx">/100</span></div><div class="ebar"><div class="efill" id="${bid}" style="width:0%"></div></div><span class="etxt"></span></div>`;
+  });
+  grid.style.display='grid';
+}
 </script>
 </body>
 </html>

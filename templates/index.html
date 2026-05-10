@@ -728,8 +728,7 @@ function updateSubjects(){
 }
 
 // ══ 10TH % BAR ══
-document.getElementById('tenth_pct').addEventListener('input',function(){document.getElementById('b_tenth').style.width=Math.min(100,parseFloat(this.value)||0)+'%';});
-
+var _pEl=document.getElementById('p_pct');if(_pEl){_pEl.addEventListener('input',function(){var b=document.getElementById('b_pct');if(b)b.style.width=Math.min(100,parseFloat(this.value)||0)+'%';});}
 
 // ══ PATH GUIDANCE STATE ══
 var pathState = {base:'', branch:'', stream:'', pct:0, budget:'medium', higher:'', heChoice:[], ciChoice:[]};

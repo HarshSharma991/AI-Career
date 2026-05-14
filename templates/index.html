@@ -14,6 +14,18 @@ body.hov #cur{width:22px;height:22px;background:#818cf8}
 body.hov #cur-ring{width:55px;height:55px;border-color:rgba(129,140,248,.6)}
 body.clk #cur{width:6px;height:6px;background:#c084fc}
 #cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── DARK SELECT FIX ── */
+select, select option {
+  background:#0a1225 !important;
+  color:#e2e8f0 !important;
+  color-scheme: dark;
+}
+select option:hover, select option:checked {
+  background:#1e3a5f !important;
+  color:#38bdf8 !important;
+}
+
 nav{position:fixed;top:0;left:0;right:0;z-index:500;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(2,8,23,.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.06)}
 .logo{display:flex;align-items:center;gap:12px;font-size:1.1rem;font-weight:800;letter-spacing:-.5px}
 .logo-box{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#38bdf8,#818cf8);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 20px rgba(56,189,248,.4);animation:logoPulse 3s infinite}
@@ -62,7 +74,7 @@ h1{font-size:clamp(3rem,8vw,6.2rem);font-weight:900;line-height:1.0;letter-spaci
 .ft{font-size:1rem;font-weight:700;margin-bottom:.5rem}
 .fd{font-size:.82rem;color:#475569;line-height:1.7}
 
-/* ═══ MODE TOGGLE ═══ */
+/* MODE TOGGLE */
 .mode-toggle-wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:2rem 1.5rem 0}
 .mode-toggle{display:flex;gap:1px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;margin-bottom:2rem}
 .mtab{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;padding:1.1rem 1.5rem;font-size:.88rem;font-weight:700;color:#334155;cursor:none;transition:all .3s;background:#070d1a;user-select:none}
@@ -146,6 +158,8 @@ h1{font-size:clamp(3rem,8vw,6.2rem);font-weight:900;line-height:1.0;letter-spaci
 .bsub .shine{position:absolute;top:-50%;left:-60%;width:35%;height:200%;background:rgba(255,255,255,.2);transform:skewX(-20deg);transition:left .6s}
 .bsub:hover .shine{left:120%}
 .bsub:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 55px rgba(56,189,248,.45)}
+
+/* LOADER */
 .ldr{position:fixed;inset:0;z-index:9999;background:rgba(2,8,23,.97);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem}
 .ldr.hidden{display:none}
 .lring-w{position:relative;width:84px;height:84px}
@@ -157,6 +171,8 @@ h1{font-size:clamp(3rem,8vw,6.2rem);font-weight:900;line-height:1.0;letter-spaci
 .lsb{font-size:.72rem;color:#334155;font-family:'JetBrains Mono',monospace;margin-top:4px;text-align:center}
 .ldots::after{content:'';animation:dots 1.5s steps(4) infinite}
 @keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}
+
+/* CAREER RESULTS */
 #rpage{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:3rem 1.5rem 6rem}
 #rpage.hidden{display:none}
 .rtop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.06);gap:1rem;flex-wrap:wrap}
@@ -200,16 +216,13 @@ h1{font-size:clamp(3rem,8vw,6.2rem);font-weight:900;line-height:1.0;letter-spaci
 .opct{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#334155}
 .rpl{position:fixed;border-radius:50%;background:rgba(56,189,248,.12);transform:scale(0);animation:rplAnim .7s ease-out forwards;pointer-events:none;z-index:99990}
 @keyframes rplAnim{to{transform:scale(5);opacity:0}}
-footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);background:#070d1a;padding:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
-.ftl{font-size:.92rem;font-weight:700;margin-bottom:5px}
-.fts{font-size:.74rem;color:#334155}
-.ftr{font-size:.74rem;color:#334155;text-align:right;line-height:2}
 
-/* ═══ MODE 2 — PATH GUIDANCE ═══ */
+/* ═══ PATH GUIDANCE ═══ */
 #path-sec{position:relative;z-index:1}
 #path-sec.hidden{display:none}
 #path-app{max-width:880px;margin:0 auto;padding:0 1.5rem 6rem}
 .path-card{background:#070d1a;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:2rem;margin-bottom:1.5rem;animation:riseIn .4s ease}
+.path-card.hidden{display:none!important}
 
 /* Path option cards */
 .path-opts{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
@@ -225,8 +238,30 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);ba
 .popt-title{font-size:1rem;font-weight:800;margin-bottom:5px}
 .popt-sub{font-size:.75rem;color:#475569;line-height:1.6}
 
-/* Result path cards */
-#path-result{display:none;max-width:880px;margin:0 auto;padding:0 1.5rem 6rem}
+/* Styled select dark */
+.styled-select{
+  width:100%;
+  background:#0a1225 !important;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;
+  color:#e2e8f0 !important;
+  font-family:'Outfit',sans-serif;
+  font-size:.95rem;
+  padding:.72rem 2.5rem .72rem 1rem;
+  outline:none;
+  cursor:pointer;
+  transition:border .25s;
+  appearance:none;
+  -webkit-appearance:none;
+  color-scheme:dark;
+}
+.styled-select:focus{border-color:#818cf8;background:rgba(129,140,248,.04)!important;box-shadow:0 0 0 3px rgba(129,140,248,.12)}
+.select-wrap{position:relative}
+.select-wrap::after{content:'▾';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#475569;pointer-events:none;font-size:.9rem}
+
+/* PATH RESULT */
+#path-result{display:none;position:relative;z-index:1}
+.path-result-inner{max-width:880px;margin:0 auto;padding:0 1.5rem 6rem}
 .path-result-card{background:#070d1a;border-radius:22px;padding:2.5rem;margin-bottom:1.5rem;animation:riseIn .5s ease;position:relative;overflow:hidden}
 .path-result-card.primary{border:1px solid rgba(129,140,248,.3)}
 .path-result-card.primary::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 0%,rgba(129,140,248,.08),transparent 50%);pointer-events:none}
@@ -246,11 +281,10 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);ba
 .career-chip:hover{background:rgba(129,140,248,.14);transform:translateY(-2px)}
 .duration-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;color:#4ade80;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.2);padding:4px 12px;border-radius:999px;margin-bottom:1rem}
 
-/* Select styling */
-.styled-select{width:100%;background:#0a1225;border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#e2e8f0;font-family:'Outfit',sans-serif;font-size:.95rem;padding:.72rem 1rem;outline:none;cursor:pointer;transition:border .25s;appearance:none;-webkit-appearance:none}
-.styled-select:focus{border-color:#818cf8;background:rgba(129,140,248,.04);box-shadow:0 0 0 3px rgba(129,140,248,.12)}
-.select-wrap{position:relative}
-.select-wrap::after{content:'▾';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#475569;pointer-events:none;font-size:.9rem}
+footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);background:#070d1a;padding:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.ftl{font-size:.92rem;font-weight:700;margin-bottom:5px}
+.fts{font-size:.74rem;color:#334155}
+.ftr{font-size:.74rem;color:#334155;text-align:right;line-height:2}
 
 @media(max-width:640px){
   nav{padding:0 1rem}h1{letter-spacing:-2px}
@@ -260,7 +294,6 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);ba
   footer{flex-direction:column;padding:1.5rem}.ftr{text-align:left}
   .path-opts{grid-template-columns:1fr}
   .mtab-sub{display:none}
-  select option{background:#0a1225;color:#e2e8f0}select{color-scheme:dark}
 }
 </style>
 </head>
@@ -334,6 +367,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);ba
     <div class="ps" data-s="4" onclick="navTo(4)"><div class="pd">4</div><span>Interests</span></div>
   </div>
   <form id="frm" novalidate>
+    <!-- SECTION 1: ACADEMIC -->
     <div class="fsec" id="s1">
       <div class="sh"><div class="si">📚</div><div><div class="stag">SECTION A · EDUCATION PATH</div><div class="stitle">Academic Performance</div><div class="ssub">Select your education path after 10th, then enter your marks.</div></div></div>
       <div style="margin-bottom:1.5rem">
@@ -375,6 +409,8 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);ba
       <div class="ig" id="marks-grid" style="display:none"></div>
       <div class="fnav"><div></div><button type="button" class="bnext" onclick="goNext(1)">Technical Skills &nbsp;→</button></div>
     </div>
+
+    <!-- SECTION 2: TECHNICAL -->
     <div class="fsec hidden" id="s2">
       <div class="sh"><div class="si">⚙️</div><div><div class="stag">SECTION B · 8 FIELDS</div><div class="stitle">Technical Skills</div><div class="ssub">Click a level to select your proficiency for each skill.</div></div></div>
       <div class="ig">
@@ -389,6 +425,8 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);ba
       </div>
       <div class="fnav"><button type="button" class="bback" onclick="goBack(2)">← Back</button><button type="button" class="bnext" onclick="goNext(2)">Soft Skills &nbsp;→</button></div>
     </div>
+
+    <!-- SECTION 3: SOFT SKILLS -->
     <div class="fsec hidden" id="s3">
       <div class="sh"><div class="si">🧠</div><div><div class="stag">SECTION C · 6 FIELDS</div><div class="stitle">Soft Skills & Personality</div><div class="ssub">Click the stars to rate yourself (1 = Low, 5 = High).</div></div></div>
       <div class="ig">
@@ -401,6 +439,8 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);ba
       </div>
       <div class="fnav"><button type="button" class="bback" onclick="goBack(3)">← Back</button><button type="button" class="bnext" onclick="goNext(3)">Interests &nbsp;→</button></div>
     </div>
+
+    <!-- SECTION 4: INTERESTS -->
     <div class="fsec hidden" id="s4">
       <div class="sh"><div class="si">💡</div><div><div class="stag">SECTION D · SELECT ALL THAT APPLY</div><div class="stitle">Interests & Preferences</div><div class="ssub">Click every domain that genuinely excites you. At least one required.</div></div></div>
       <div class="intg">
@@ -413,46 +453,46 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);ba
         <label class="icard" onclick="toggleInt(this,'interest_edu')"><input type="checkbox" id="interest_edu"/><span class="ichk">✓</span><span class="iico">📚</span><span class="iname">Education</span></label>
       </div>
       <span class="etxt" id="eint"></span>
-      <div class="fnav"><button type="button" class="bback" onclick="goBack(4)">← Back</button><button type="submit" class="bsub"><span class="shine"></span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Analyse My Profile</button></div>
+      <div class="fnav"><button type="button" class="bback" onclick="goBack(4)">← Back</button><button type="button" class="bsub" onclick="submitCareerForm()"><span class="shine"></span>🔍 &nbsp;Analyse My Profile</button></div>
     </div>
   </form>
 </div>
 </div>
 
-<!-- MODE 2 — EDUCATION PATH GUIDANCE (Step-wise) -->
+<!-- ════════════════════════════════════════
+     MODE 2 — EDUCATION PATH GUIDANCE
+     ALL STEPS HIDDEN BY DEFAULT, shown one at a time via JS
+════════════════════════════════════════ -->
 <div id="path-sec" class="hidden">
 <div id="path-app">
 
   <!-- STEP P1: After 10th — Diploma or 12th? -->
   <div id="ps1" class="path-card">
     <div class="sh"><div class="si">🏫</div><div><div class="stag">STEP 1 OF 4 · FOUNDATION</div><div class="stitle">Education Path Guidance</div><div class="ssub">Answer a few questions to get your personalized education roadmap.</div></div></div>
-    <div class="f" style="margin-bottom:2rem"><label>After completing 10th grade, what did you pursue (or plan to pursue)?</label>
+    <div class="f" style="margin-bottom:2rem">
+      <label>After completing 10th grade, what did you pursue (or plan to pursue)?</label>
       <div class="path-opts">
-        <div class="popt" onclick="selectP1('diploma',this)">
+        <div class="popt" id="p1_diploma" onclick="selectP1('diploma',this)">
           <span class="popt-ico">🎓</span>
           <div class="popt-title">Diploma</div>
           <div class="popt-sub">3-year Polytechnic program after 10th</div>
         </div>
-        <div class="popt" onclick="selectP1('12th',this)">
+        <div class="popt" id="p1_12th" onclick="selectP1('12th',this)">
           <span class="popt-ico">📖</span>
           <div class="popt-title">12th (Intermediate)</div>
           <div class="popt-sub">2-year senior secondary education</div>
         </div>
       </div>
-      <input type="hidden" id="p_base" value=""/>
       <span class="etxt" id="e_p1"></span>
     </div>
     <div class="fnav"><div></div><button type="button" class="bnext" style="border-color:rgba(129,140,248,.3);color:#818cf8" onclick="goPathNext(1)">Next &nbsp;→</button></div>
   </div>
 
-  <!-- STEP P2a: Diploma Branch -->
-  <div id="ps2_diploma" class="path-card hidden"
-id="ps2_12th" class="path-card hidden"  
-id="ps3" class="path-card hidden"
-id="ps4_yes" class="path-card hidden"
-id="ps4_no" class="path-card hidden">
+  <!-- STEP P2a: Diploma Branch (hidden by default) -->
+  <div id="ps2_diploma" class="path-card hidden">
     <div class="sh"><div class="si">🔧</div><div><div class="stag">STEP 2 OF 4 · SPECIALIZATION</div><div class="stitle">Diploma Branch</div><div class="ssub">Select the branch of your Diploma program.</div></div></div>
-    <div class="f" style="margin-bottom:2rem"><label>Which branch did you study in your Diploma?</label>
+    <div class="f" style="margin-bottom:2rem">
+      <label>Which branch did you study in your Diploma?</label>
       <div class="path-opts" style="grid-template-columns:repeat(3,1fr)">
         <div class="popt" onclick="selectBranch('cs',this)"><span class="popt-ico">💻</span><div class="popt-title">Computer Science</div></div>
         <div class="popt" onclick="selectBranch('it',this)"><span class="popt-ico">🌐</span><div class="popt-title">Information Technology</div></div>
@@ -461,34 +501,33 @@ id="ps4_no" class="path-card hidden">
         <div class="popt" onclick="selectBranch('electrical',this)"><span class="popt-ico">⚡</span><div class="popt-title">Electrical</div></div>
         <div class="popt" onclick="selectBranch('electronics',this)"><span class="popt-ico">📡</span><div class="popt-title">Electronics & Comm.</div></div>
       </div>
-      <input type="hidden" id="p_branch" value=""/>
       <span class="etxt" id="e_p2d"></span>
     </div>
     <div class="fnav"><button type="button" class="bback" onclick="goPathBack(2)">← Back</button><button type="button" class="bnext" style="border-color:rgba(129,140,248,.3);color:#818cf8" onclick="goPathNext(2)">Next &nbsp;→</button></div>
   </div>
 
-  <!-- STEP P2b: 12th Stream -->
+  <!-- STEP P2b: 12th Stream (hidden by default) -->
   <div id="ps2_12th" class="path-card hidden">
     <div class="sh"><div class="si">📚</div><div><div class="stag">STEP 2 OF 4 · STREAM</div><div class="stitle">12th Stream</div><div class="ssub">Select the stream you studied in 11th and 12th grade.</div></div></div>
-    <div class="f" style="margin-bottom:2rem"><label>Which stream did you choose for 12th?</label>
+    <div class="f" style="margin-bottom:2rem">
+      <label>Which stream did you choose for 12th?</label>
       <div class="path-opts">
         <div class="popt" onclick="selectStream('pcm',this)"><span class="popt-ico">🔢</span><div class="popt-title">Science — PCM</div><div class="popt-sub">Physics, Chemistry, Maths</div></div>
         <div class="popt" onclick="selectStream('pcb',this)"><span class="popt-ico">🌿</span><div class="popt-title">Science — PCB</div><div class="popt-sub">Physics, Chemistry, Biology</div></div>
         <div class="popt" onclick="selectStream('commerce',this)"><span class="popt-ico">📊</span><div class="popt-title">Commerce</div><div class="popt-sub">Accounts, Business, Economics</div></div>
         <div class="popt" onclick="selectStream('arts',this)"><span class="popt-ico">🎨</span><div class="popt-title">Arts / Humanities</div><div class="popt-sub">History, Pol. Science, Geography</div></div>
       </div>
-      <input type="hidden" id="p_stream" value=""/>
       <span class="etxt" id="e_p2t"></span>
     </div>
     <div class="fnav"><button type="button" class="bback" onclick="goPathBack(2)">← Back</button><button type="button" class="bnext" style="border-color:rgba(129,140,248,.3);color:#818cf8" onclick="goPathNext(2)">Next &nbsp;→</button></div>
   </div>
 
-  <!-- STEP P3: Percentage + Higher Education? -->
+  <!-- STEP P3: Score + Goal (hidden by default) -->
   <div id="ps3" class="path-card hidden">
     <div class="sh"><div class="si">📊</div><div><div class="stag">STEP 3 OF 4 · ACADEMICS & GOAL</div><div class="stitle">Your Score & Future Plan</div><div class="ssub">Tell us your academic score and what you want to do next.</div></div></div>
     <div class="ig" style="margin-bottom:1.5rem">
       <div class="f"><label>Your Percentage / CGPA *</label>
-        <div class="iw"><input type="number" id="p_pct" min="30" max="100" placeholder="e.g. 78"/><span class="sfx">%</span></div>
+        <div class="iw"><input type="number" id="p_pct" min="30" max="100" placeholder="e.g. 78" oninput="document.getElementById('b_pct').style.width=Math.min(100,parseFloat(this.value)||0)+'%'"/><span class="sfx">%</span></div>
         <div class="ebar"><div class="efill" id="b_pct" style="width:0%"></div></div>
         <span class="etxt" id="e_p3pct"></span>
       </div>
@@ -500,29 +539,30 @@ id="ps4_no" class="path-card hidden">
         </select></div>
       </div>
     </div>
-    <div class="f" style="margin-bottom:2rem"><label>Do you want to pursue higher education?</label>
+    <div class="f" style="margin-bottom:2rem">
+      <label>Do you want to pursue higher education?</label>
       <div class="path-opts">
-        <div class="popt" onclick="selectHigher('yes',this)">
+        <div class="popt" id="p3_yes" onclick="selectHigher('yes',this)">
           <span class="popt-ico">🎓</span>
           <div class="popt-title">Yes, I want to study further</div>
           <div class="popt-sub">B.Tech, MBBS, CA, MBA, B.Sc etc.</div>
         </div>
-        <div class="popt" onclick="selectHigher('no',this)">
+        <div class="popt" id="p3_no" onclick="selectHigher('no',this)">
           <span class="popt-ico">💼</span>
           <div class="popt-title">No, I want to work now</div>
           <div class="popt-sub">Get a job based on current qualification</div>
         </div>
       </div>
-      <input type="hidden" id="p_higher" value=""/>
       <span class="etxt" id="e_p3h"></span>
     </div>
     <div class="fnav"><button type="button" class="bback" onclick="goPathBack(3)">← Back</button><button type="button" class="bnext" style="border-color:rgba(129,140,248,.3);color:#818cf8" onclick="goPathNext(3)">Next &nbsp;→</button></div>
   </div>
 
-  <!-- STEP P4a: Higher Education — What to pursue -->
+  <!-- STEP P4a: Higher Education (hidden by default) -->
   <div id="ps4_yes" class="path-card hidden">
     <div class="sh"><div class="si">🎯</div><div><div class="stag">STEP 4 OF 4 · HIGHER EDUCATION</div><div class="stitle">What Do You Want to Pursue?</div><div class="ssub">Select the field of higher education that interests you most.</div></div></div>
-    <div class="f" style="margin-bottom:2rem"><label>Choose your preferred area of higher study</label>
+    <div class="f" style="margin-bottom:2rem">
+      <label>Choose your preferred area of higher study</label>
       <div class="intg" style="margin-bottom:0">
         <label class="icard" onclick="toggleInt(this,'he_eng')"><input type="checkbox" id="he_eng"/><span class="ichk">✓</span><span class="iico">⚙️</span><span class="iname">Engineering (B.Tech)</span></label>
         <label class="icard" onclick="toggleInt(this,'he_med')"><input type="checkbox" id="he_med"/><span class="ichk">✓</span><span class="iico">🏥</span><span class="iname">Medical (MBBS/BDS)</span></label>
@@ -544,10 +584,11 @@ id="ps4_no" class="path-card hidden">
     </div>
   </div>
 
-  <!-- STEP P4b: No higher education -->
+  <!-- STEP P4b: Direct Job (hidden by default) -->
   <div id="ps4_no" class="path-card hidden">
     <div class="sh"><div class="si">💼</div><div><div class="stag">STEP 4 OF 4 · CAREER INTERESTS</div><div class="stitle">Your Career Interests</div><div class="ssub">Select the domains you are interested in working in.</div></div></div>
-    <div class="f" style="margin-bottom:2rem"><label>Which career domains interest you? (Select all that apply)</label>
+    <div class="f" style="margin-bottom:2rem">
+      <label>Which career domains interest you? (Select all that apply)</label>
       <div class="intg" style="margin-bottom:0">
         <label class="icard" onclick="toggleInt(this,'ci_tech')"><input type="checkbox" id="ci_tech"/><span class="ichk">✓</span><span class="iico">💻</span><span class="iname">Technology / IT</span></label>
         <label class="icard" onclick="toggleInt(this,'ci_mfg')"><input type="checkbox" id="ci_mfg"/><span class="ichk">✓</span><span class="iico">🏭</span><span class="iname">Manufacturing</span></label>
@@ -569,11 +610,14 @@ id="ps4_no" class="path-card hidden">
 </div>
 </div><!-- end path-sec -->
 
-<!-- PATH RESULT -->
-<div id="path-result" style="display:none">
-  <div style="max-width:880px;margin:0 auto;padding:0 1.5rem 6rem">
+<!-- PATH RESULT (fully separate, hidden by default) -->
+<div id="path-result">
+  <div class="path-result-inner">
     <div class="rtop">
-      <div><div class="rtitle">Your <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Education Roadmap</span></div><div class="rsub">Personalized guidance based on your profile and goals.</div></div>
+      <div>
+        <div class="rtitle">Your <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Education Roadmap</span></div>
+        <div class="rsub">Personalized guidance based on your profile and goals.</div>
+      </div>
       <button class="breset" onclick="resetPath()">← Start Over</button>
     </div>
     <div id="path-result-content"></div>
@@ -604,14 +648,13 @@ id="ps4_no" class="path-card hidden">
 </footer>
 
 <script>
-
 // ══ CURSOR ══
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
 let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
 (function animRing(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=Math.round(rx)+'px';ring.style.top=Math.round(ry)+'px';requestAnimationFrame(animRing)})();
 function addHov(sel){document.querySelectorAll(sel).forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'))})}
-addHov('button,a,.pill,.icard,.popt,.stat,.feat,.ps,.star,.chip,.career-chip,.ocard,.breset,.st,.btn-glow,.btn-out,.btn-purple,.mtab');
+addHov('button,a,.pill,.icard,.popt,.feat,.ps,.star,.chip,.career-chip,.ocard,.breset,.st,.btn-glow,.btn-out,.btn-purple,.mtab');
 document.addEventListener('mousedown',()=>document.body.classList.add('clk'));
 document.addEventListener('mouseup',()=>document.body.classList.remove('clk'));
 document.addEventListener('click',e=>{const r=document.createElement('div');r.className='rpl';const s=80;Object.assign(r.style,{left:e.clientX-s/2+'px',top:e.clientY-s/2+'px',width:s+'px',height:s+'px'});document.body.appendChild(r);setTimeout(()=>r.remove(),800)});
@@ -638,20 +681,27 @@ function animCnt(id,target,sfx,dur){const el=document.getElementById(id);let s=n
 setTimeout(()=>{animCnt('c1',1423,'',2200);animCnt('c2',15,'',1600);animCnt('c3',25,'+',1900);animCnt('c4',87,'%',2400)},600);
 
 // ══ MODE SWITCH ══
-let currentMode = 'career';
+let currentMode='career';
 function switchMode(mode){
-  currentMode = mode;
-  document.getElementById('app-wrap').style.display = mode==='career'?'block':'none';
-  document.getElementById('path-sec').classList.toggle('hidden', mode!=='path');
-  document.getElementById('path-result').style.display = 'none';
-  document.getElementById('tab-career').classList.toggle('active', mode==='career');
-  document.getElementById('tab-path').classList.toggle('active', mode==='path');
-  document.getElementById('tab-path').classList.toggle('purple', mode==='path');
+  currentMode=mode;
+  document.getElementById('app-wrap').style.display=mode==='career'?'block':'none';
+  const pathSec=document.getElementById('path-sec');
+  const pathRes=document.getElementById('path-result');
+  if(mode==='path'){
+    pathSec.classList.remove('hidden');
+    pathRes.style.display='none';
+  } else {
+    pathSec.classList.add('hidden');
+    pathRes.style.display='none';
+  }
+  document.getElementById('tab-career').classList.toggle('active',mode==='career');
+  document.getElementById('tab-path').classList.toggle('active',mode==='path');
+  document.getElementById('tab-path').classList.toggle('purple',mode==='path');
   document.getElementById('tab-career').classList.remove('purple');
   document.getElementById('app-sec').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ══ FORM NAV ══
+// ══ CAREER FORM NAV ══
 let step=1;
 function upProg(s){document.querySelectorAll('.ps').forEach(el=>{const n=parseInt(el.dataset.s);el.classList.remove('act','dn');if(n===s)el.classList.add('act');else if(n<s)el.classList.add('dn');el.querySelector('.pd').textContent=n<s?'✓':n;})}
 function showSec(n){document.querySelectorAll('.fsec').forEach(s=>s.classList.add('hidden'));document.getElementById('s'+n).classList.remove('hidden');step=n;upProg(n);document.getElementById('app-sec').scrollIntoView({behavior:'smooth',block:'start'})}
@@ -659,7 +709,7 @@ function navTo(n){if(n<=step)showSec(n)}
 function goBack(f){showSec(f-1)}
 function goNext(f){if(!validate(f))return;showSec(f+1)}
 
-// ══ VALIDATION ══
+// ══ CAREER VALIDATION ══
 function validate(s){
   if(s===1){
     const ep=document.getElementById('edu_path').value;
@@ -699,9 +749,9 @@ document.querySelectorAll('.stars').forEach(wrap=>{
 (function(){const sl=document.getElementById('personality_score'),dv=document.getElementById('pval');function upd(){const v=parseFloat(sl.value);dv.textContent=v.toFixed(2);sl.style.background=`linear-gradient(to right,#38bdf8 ${v*100}%,rgba(255,255,255,.06) ${v*100}%)`}sl.addEventListener('input',upd);upd();})();
 
 // ══ INTEREST TOGGLE ══
-function toggleInt(label,id){const cb=document.getElementById(id);setTimeout(()=>{label.classList.toggle('sel',cb.checked);addHov('.icard');},0)}
+function toggleInt(label,id){const cb=document.getElementById(id);setTimeout(()=>{label.classList.toggle('sel',cb.checked);},0)}
 
-// ══ EDU PATH ══
+// ══ CAREER FORM EDU PATH ══
 var SUBJECT_MAP={
   diploma_cs:[['Mathematics','math_score','bm'],['Physics','science_score','bs'],['Programming','cs_score','bc'],['English','english_score','be']],
   diploma_it:[['Mathematics','math_score','bm'],['Physics','science_score','bs'],['Programming','cs_score','bc'],['English','english_score','be']],
@@ -714,14 +764,20 @@ var SUBJECT_MAP={
   commerce:[['Accountancy','math_score','bm'],['Business Studies','science_score','bs'],['Economics','cs_score','bc'],['English','english_score','be']],
   arts:[['History/Pol.Sci','math_score','bm'],['Geography/Psych','science_score','bs'],['Sociology','cs_score','bc'],['English','english_score','be']]
 };
+
 function selectEduPath(val,el){
   document.querySelectorAll('#edu-path-pills .pill').forEach(p=>p.classList.remove('on'));
-  el.classList.add('on');document.getElementById('edu_path').value=val;document.getElementById('e_edupath').textContent='';
+  el.classList.add('on');
+  document.getElementById('edu_path').value=val;
+  document.getElementById('e_edupath').textContent='';
   document.getElementById('diploma-branch-wrap').style.display=val==='diploma'?'block':'none';
   document.getElementById('stream-wrap').style.display=val==='12th'?'block':'none';
-  document.getElementById('diploma_branch').value='';document.getElementById('stream_type').value='';
-  document.getElementById('marks-grid').style.display='none';document.getElementById('marks-grid').innerHTML='';
+  document.getElementById('diploma_branch').value='';
+  document.getElementById('stream_type').value='';
+  document.getElementById('marks-grid').style.display='none';
+  document.getElementById('marks-grid').innerHTML='';
 }
+
 function updateSubjects(){
   const path=document.getElementById('edu_path').value,branch=document.getElementById('diploma_branch').value,stream=document.getElementById('stream_type').value;
   let key=path==='diploma'&&branch?'diploma_'+branch:path==='12th'&&stream?stream:'';
@@ -732,142 +788,262 @@ function updateSubjects(){
   grid.style.display='grid';
 }
 
-// ══ 10TH % BAR ══
-var _pEl=document.getElementById('p_pct');if(_pEl){_pEl.addEventListener('input',function(){var b=document.getElementById('b_pct');if(b)b.style.width=Math.min(100,parseFloat(this.value)||0)+'%';});}
+// ══ CAREER FORM SUBMIT ══
+function submitCareerForm(){
+  if(!validate(4))return;
+  const ldr=document.getElementById('ldr');
+  ldr.classList.remove('hidden');
+  setTimeout(()=>{
+    ldr.classList.add('hidden');
+    buildCareerResult();
+  },2200);
+}
+
+function buildCareerResult(){
+  const CAREERS=[
+    {name:'Software Engineer',emoji:'💻',sal:'₹6–18 LPA',req:{prog_skill:2,web_dev_skill:1,interest_tech:true},desc:'Strong programming and web skills point toward software engineering. You have the technical foundation to build scalable products and services.'},
+    {name:'Data Scientist / Analyst',emoji:'📊',sal:'₹8–25 LPA',req:{data_analysis_skill:2,ml_skill:1,interest_tech:true},desc:'Your data analysis and ML aptitude signal strong fit for data science — one of the fastest growing fields in India.'},
+    {name:'Cloud & DevOps Engineer',emoji:'☁️',sal:'₹8–22 LPA',req:{cloud_skill:1,networking_skill:1,interest_tech:true},desc:'Cloud computing is booming. Your networking and cloud skills are a direct match for DevOps and cloud architecture roles.'},
+    {name:'Cybersecurity Analyst',emoji:'🔐',sal:'₹7–20 LPA',req:{networking_skill:2,db_skill:1,interest_tech:true},desc:'Strong networking skills combined with analytical personality make cybersecurity a natural fit.'},
+    {name:'Product Manager',emoji:'📋',sal:'₹12–35 LPA',req:{interest_mgmt:true,communication:4,leadership:3},desc:'Leadership, communication, and management interest align perfectly with product management roles at tech companies.'},
+    {name:'Business Analyst',emoji:'📈',sal:'₹6–18 LPA',req:{interest_mgmt:true,interest_finance:true,problem_solving:3},desc:'Problem-solving combined with business interest maps well to business analysis — bridging tech and strategy.'},
+    {name:'UI/UX Designer',emoji:'🎨',sal:'₹5–16 LPA',req:{interest_design:true,web_dev_skill:1},desc:'Your design interest and web skills are a strong combination for UX/UI — a creative field with high demand.'},
+    {name:'Mobile App Developer',emoji:'📱',sal:'₹6–18 LPA',req:{mobile_skill:1,prog_skill:1,interest_tech:true},desc:'Mobile development is a high-demand specialty. Your programming base + mobile skills make this a strong fit.'},
+    {name:'Healthcare IT',emoji:'🏥',sal:'₹6–15 LPA',req:{interest_health:true,db_skill:1},desc:'Healthcare technology bridges medicine and software — a growing field for those with both tech skills and health interest.'},
+    {name:'Educator / Trainer',emoji:'📚',sal:'₹5–14 LPA',req:{interest_edu:true,communication:4},desc:'Strong communication and education interest signal a great fit for EdTech, academic roles, or corporate training.'},
+    {name:'Financial Analyst',emoji:'💰',sal:'₹6–20 LPA',req:{interest_finance:true,data_analysis_skill:1},desc:'Finance interest combined with analytical skills points toward financial analysis, investment banking, or fintech.'},
+    {name:'Machine Learning Engineer',emoji:'🤖',sal:'₹10–30 LPA',req:{ml_skill:2,prog_skill:2,interest_science:true},desc:'Advanced ML and programming skills, combined with science interest, align with the most cutting-edge AI engineering roles.'},
+    {name:'Research Scientist',emoji:'🔬',sal:'₹8–22 LPA',req:{interest_science:true,ml_skill:1,problem_solving:4},desc:'Your analytical, science-driven profile is well-suited for R&D roles in government labs, universities, or tech research divisions.'},
+    {name:'Database Administrator',emoji:'🗄️',sal:'₹5–16 LPA',req:{db_skill:2,networking_skill:1},desc:'Deep database skills are always in demand for enterprise roles in banking, healthcare, and large corporations.'},
+    {name:'Full Stack Developer',emoji:'🌐',sal:'₹6–20 LPA',req:{web_dev_skill:2,db_skill:1,prog_skill:1},desc:'Frontend, backend, and database skills together make you a versatile full-stack developer — highly sought after by startups and MNCs.'}
+  ];
+
+  // Score each career
+  const vals={
+    prog_skill:parseInt(document.getElementById('prog_skill').value)||0,
+    web_dev_skill:parseInt(document.getElementById('web_dev_skill').value)||0,
+    db_skill:parseInt(document.getElementById('db_skill').value)||0,
+    networking_skill:parseInt(document.getElementById('networking_skill').value)||0,
+    ml_skill:parseInt(document.getElementById('ml_skill').value)||0,
+    mobile_skill:parseInt(document.getElementById('mobile_skill').value)||0,
+    cloud_skill:parseInt(document.getElementById('cloud_skill').value)||0,
+    data_analysis_skill:parseInt(document.getElementById('data_analysis_skill').value)||0,
+    communication:parseInt(document.getElementById('communication').value)||3,
+    teamwork:parseInt(document.getElementById('teamwork').value)||3,
+    leadership:parseInt(document.getElementById('leadership').value)||3,
+    adaptability:parseInt(document.getElementById('adaptability').value)||3,
+    problem_solving:parseInt(document.getElementById('problem_solving').value)||3,
+    personality_score:parseFloat(document.getElementById('personality_score').value)||0.5,
+    interest_tech:document.getElementById('interest_tech').checked,
+    interest_mgmt:document.getElementById('interest_mgmt').checked,
+    interest_science:document.getElementById('interest_science').checked,
+    interest_design:document.getElementById('interest_design').checked,
+    interest_health:document.getElementById('interest_health').checked,
+    interest_finance:document.getElementById('interest_finance').checked,
+    interest_edu:document.getElementById('interest_edu').checked
+  };
+
+  const scored=CAREERS.map(c=>{
+    let score=Math.random()*15+35; // base noise
+    for(const[k,threshold] of Object.entries(c.req)){
+      if(typeof threshold==='boolean'){
+        if(vals[k]===threshold) score+=20;
+      } else {
+        score+=Math.min(vals[k],3)*8;
+        if(vals[k]>=threshold) score+=12;
+      }
+    }
+    // tech interest bonus
+    if(vals.interest_tech && c.req.interest_tech) score+=10;
+    score+=vals.problem_solving*2+vals.adaptability;
+    return{...c,score:Math.min(99,Math.round(score))};
+  }).sort((a,b)=>b.score-a.score);
+
+  const top=scored[0];
+  const others=scored.slice(1,7);
+
+  // Build top card
+  document.getElementById('topslot').innerHTML=`
+    <div class="topcard">
+      <div class="tcbadge">⭐ Best Match — AI Recommendation</div>
+      <div class="rhead">
+        <div class="rebox">${top.emoji}</div>
+        <div>
+          <div class="rname">${top.name}</div>
+          <div class="rsal">Expected: ${top.sal}</div>
+        </div>
+      </div>
+      <div class="cblk">
+        <div class="crow"><span class="clbl">Match Score</span><span class="cnum">${top.score}%</span></div>
+        <div class="ctrack"><div class="cfill" id="topbar" style="width:0%"></div></div>
+      </div>
+      <div class="chips">
+        ${vals.interest_tech?'<span class="chip">💻 Technology</span>':''}
+        ${vals.interest_mgmt?'<span class="chip">📈 Management</span>':''}
+        ${vals.interest_science?'<span class="chip">🔬 Science</span>':''}
+        ${vals.interest_design?'<span class="chip">🎨 Design</span>':''}
+        ${vals.interest_health?'<span class="chip">🏥 Healthcare</span>':''}
+        ${vals.interest_finance?'<span class="chip">💰 Finance</span>':''}
+        ${vals.interest_edu?'<span class="chip">📚 Education</span>':''}
+      </div>
+      <div class="expl"><strong>Why this career?</strong> ${top.desc}</div>
+    </div>`;
+
+  setTimeout(()=>{const b=document.getElementById('topbar');if(b)b.style.width=top.score+'%';},100);
+
+  // Build other cards
+  document.getElementById('otherslot').innerHTML=`
+    <div class="sec-lbl" style="text-align:left;margin-bottom:1rem">Other Strong Matches</div>
+    <div class="ogrid">
+      ${others.map((c,i)=>`
+        <div class="ocard" style="animation-delay:${i*.08}s">
+          <div class="oh"><span class="oemoji">${c.emoji}</span><div><div class="oname">${c.name}</div><div class="osal">${c.sal}</div></div></div>
+          <div class="otrack"><div class="ofill" id="ob${i}" style="width:0%"></div></div>
+          <div class="opct">${c.score}% match</div>
+        </div>`).join('')}
+    </div>`;
+
+  setTimeout(()=>{others.forEach((c,i)=>{const b=document.getElementById('ob'+i);if(b)b.style.width=c.score+'%';});},200);
+
+  // Show result page
+  document.getElementById('app-wrap').style.display='none';
+  document.getElementById('rpage').classList.remove('hidden');
+  document.getElementById('rpage').scrollIntoView({behavior:'smooth',block:'start'});
+}
 
 // ══ PATH GUIDANCE STATE ══
-var pathState = {base:'', branch:'', stream:'', pct:0, budget:'medium', higher:'', heChoice:[], ciChoice:[]};
+var pathState={base:'',branch:'',stream:'',pct:0,budget:'medium',higher:'',heChoice:[],ciChoice:[]};
 
-function selectP1(val, el){
+// Helper: hide all path steps
+function hideAllPathSteps(){
+  ['ps1','ps2_diploma','ps2_12th','ps3','ps4_yes','ps4_no'].forEach(id=>{
+    document.getElementById(id).classList.add('hidden');
+  });
+}
+
+function selectP1(val,el){
   document.querySelectorAll('#ps1 .popt').forEach(p=>p.classList.remove('sel','sel-purple'));
   el.classList.add('sel');
-  pathState.base = val;
-  document.getElementById('p_base').value = val;
-  document.getElementById('e_p1').textContent = '';
+  pathState.base=val;
+  document.getElementById('e_p1').textContent='';
 }
 
-function selectBranch(val, el){
+function selectBranch(val,el){
   document.querySelectorAll('#ps2_diploma .popt').forEach(p=>p.classList.remove('sel','sel-purple'));
   el.classList.add('sel');
-  pathState.branch = val;
-  document.getElementById('p_branch').value = val;
-  document.getElementById('e_p2d').textContent = '';
+  pathState.branch=val;
+  document.getElementById('e_p2d').textContent='';
 }
 
-function selectStream(val, el){
+function selectStream(val,el){
   document.querySelectorAll('#ps2_12th .popt').forEach(p=>p.classList.remove('sel','sel-purple'));
   el.classList.add('sel');
-  pathState.stream = val;
-  document.getElementById('p_stream').value = val;
-  document.getElementById('e_p2t').textContent = '';
+  pathState.stream=val;
+  document.getElementById('e_p2t').textContent='';
 }
 
-function selectHigher(val, el){
+function selectHigher(val,el){
   document.querySelectorAll('#ps3 .popt').forEach(p=>p.classList.remove('sel','sel-purple'));
   el.classList.add(val==='yes'?'sel':'sel-purple');
-  pathState.higher = val;
-  document.getElementById('p_higher').value = val;
-  document.getElementById('e_p3h').textContent = '';
+  pathState.higher=val;
+  document.getElementById('e_p3h').textContent='';
 }
 
 function goPathNext(step){
+  const scrollTarget=document.getElementById('app-sec');
   if(step===1){
     if(!pathState.base){document.getElementById('e_p1').textContent='Please select an option.';return;}
-    document.getElementById('ps1').classList.add('hidden');
-    if(pathState.base==='diploma') document.getElementById('ps2_diploma').classList.remove('hidden');
-    else document.getElementById('ps2_12th').classList.remove('hidden');
+    hideAllPathSteps();
+    if(pathState.base==='diploma'){
+      document.getElementById('ps2_diploma').classList.remove('hidden');
+    } else {
+      document.getElementById('ps2_12th').classList.remove('hidden');
+    }
   }
   else if(step===2){
     if(pathState.base==='diploma'){
       if(!pathState.branch){document.getElementById('e_p2d').textContent='Please select your branch.';return;}
-      document.getElementById('ps2_diploma').classList.add('hidden');
     } else {
       if(!pathState.stream){document.getElementById('e_p2t').textContent='Please select your stream.';return;}
-      document.getElementById('ps2_12th').classList.add('hidden');
     }
+    hideAllPathSteps();
     document.getElementById('ps3').classList.remove('hidden');
   }
   else if(step===3){
-    const pct = parseFloat(document.getElementById('p_pct').value);
+    const pct=parseFloat(document.getElementById('p_pct').value);
     if(!pct||pct<30||pct>100){document.getElementById('e_p3pct').textContent='Please enter a valid percentage (30–100).';return;}
     if(!pathState.higher){document.getElementById('e_p3h').textContent='Please select an option.';return;}
-    pathState.pct = pct;
-    pathState.budget = document.getElementById('p_budget').value;
-    document.getElementById('ps3').classList.add('hidden');
-    if(pathState.higher==='yes') document.getElementById('ps4_yes').classList.remove('hidden');
-    else document.getElementById('ps4_no').classList.remove('hidden');
+    pathState.pct=pct;
+    pathState.budget=document.getElementById('p_budget').value;
+    hideAllPathSteps();
+    if(pathState.higher==='yes'){
+      document.getElementById('ps4_yes').classList.remove('hidden');
+    } else {
+      document.getElementById('ps4_no').classList.remove('hidden');
+    }
   }
-  document.getElementById('app-sec').scrollIntoView({behavior:'smooth',block:'start'});
+  scrollTarget.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function goPathBack(step){
+  hideAllPathSteps();
   if(step===2){
-    if(pathState.base==='diploma') document.getElementById('ps2_diploma').classList.add('hidden');
-    else document.getElementById('ps2_12th').classList.add('hidden');
     document.getElementById('ps1').classList.remove('hidden');
   }
   else if(step===3){
-    document.getElementById('ps3').classList.add('hidden');
     if(pathState.base==='diploma') document.getElementById('ps2_diploma').classList.remove('hidden');
     else document.getElementById('ps2_12th').classList.remove('hidden');
   }
   else if(step===4){
-    document.getElementById('ps4_yes').classList.add('hidden');
-    document.getElementById('ps4_no').classList.add('hidden');
     document.getElementById('ps3').classList.remove('hidden');
   }
   document.getElementById('app-sec').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ══ RESULT DATA ══
-var ROADMAP = {
-  higher: {
-    diploma_cs_eng:     {title:'B.Tech — Computer Science (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in CS/IT with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU affiliated colleges, NITs (limited seats)',steps:[{t:'Apply for Lateral Entry Admission',d:'After Diploma, you get direct admission to 2nd year of B.Tech. No need to start from 1st year. Entrance exam: UPSEE Lateral Entry or state-specific CET.'},{t:'Complete B.Tech in 2 Years',d:'Core subjects: Data Structures, Algorithms, DBMS, OS, Computer Networks, Software Engineering. Focus on projects and internships.'},{t:'Build Your Portfolio',d:'Contribute to GitHub, build 2–3 real-world projects, participate in hackathons. Recruiters value practical experience over marks.'},{t:'Campus Placements / Off-campus',d:'Top companies visiting engineering colleges: TCS, Infosys, Wipro, Accenture, and product companies like Google, Amazon (via off-campus).'},{t:'Post B.Tech Options',d:'M.Tech (GATE), MBA (CAT), MS Abroad (GRE), or direct industry job.'}],careers:['Software Engineer — ₹4–18 LPA','Data Analyst — ₹5–15 LPA','Web Developer — ₹4–12 LPA','Cloud Engineer — ₹6–20 LPA','Product Manager (MBA) — ₹12–35 LPA'],certifications:['AWS Certified Solutions Architect','Google Associate Cloud Engineer','Meta Front-End Developer Certificate']},
-    diploma_mech_eng:   {title:'B.Tech — Mechanical Engineering (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in Mechanical with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU, NIT Trichy (limited), state engineering colleges',steps:[{t:'Lateral Entry into B.Tech Mechanical 2nd Year',d:'Apply through UPSEE Lateral Entry. Subjects: Thermodynamics, Fluid Mechanics, Manufacturing Processes, CAD/CAM.'},{t:'Develop CAD & Simulation Skills',d:'Master AutoCAD, SolidWorks, ANSYS. These are must-have tools for mechanical engineers in industry.'},{t:'Industrial Training & Internship',d:'Do internship at manufacturing companies — automobile, FMCG, steel plants. Industrial exposure is critical for placements.'},{t:'Campus Placements',d:'Core companies: TATA Motors, Maruti, Mahindra, L&T, BHEL, NTPC. Package: ₹3.5–8 LPA for core jobs.'},{t:'Higher Study Options',d:'M.Tech (GATE), MBA Operations/Supply Chain, MS in Mechanical Engineering abroad.'}],careers:['Mechanical Engineer — ₹4–12 LPA','Design Engineer — ₹5–14 LPA','Production Manager — ₹6–15 LPA','Automobile Engineer — ₹4–10 LPA','GATE → PSU (BHEL, NTPC, ONGC) — ₹8–20 LPA'],certifications:['SolidWorks CSWA Certificate','ANSYS Certification','Six Sigma Green Belt']},
-    diploma_civil_eng:  {title:'B.Tech — Civil Engineering (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in Civil with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU, state engineering colleges, NITs',steps:[{t:'Lateral Entry into B.Tech Civil 2nd Year',d:'Subjects: Structural Analysis, RCC Design, Geotechnical Engineering, Transportation Engineering, Surveying.'},{t:'Master Design Software',d:'AutoCAD, STAAD Pro, REVIT, ETABS — these are essential for civil engineering jobs and consultancy work.'},{t:'Government Job Preparation',d:'Prepare for SSC JE, UPPSC AE, PWD Junior Engineer exams alongside your degree. High demand for civil engineers in govt sector.'},{t:'Construction Industry Placement',d:'Companies: L&T, DLF, Shapoorji Pallonji, Consulting firms. Site Engineer, Project Manager roles.'},{t:'Higher Options',d:'M.Tech (GATE), MBA Infrastructure Management, or start your own consultancy.'}],careers:['Site Engineer — ₹4–10 LPA','Structural Designer — ₹5–14 LPA','Project Manager — ₹8–20 LPA','Govt Jr. Engineer (JE) — ₹6–12 LPA','Urban Planner — ₹6–15 LPA'],certifications:['AutoCAD Certified Professional','PMP (Project Management)','LEED Green Associate']},
-    diploma_elec_eng:   {title:'B.Tech — Electrical Engineering (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in Electrical with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU, NIT, state engineering colleges',steps:[{t:'Lateral Entry to B.Tech Electrical 2nd Year',d:'Subjects: Power Systems, Electrical Machines, Control Systems, Power Electronics, High Voltage Engineering.'},{t:'Focus on PSU & Govt Exams',d:'GATE score opens doors to BHEL, NTPC, PGCIL, UPPCL — top paying government jobs for electrical engineers.'},{t:'Industrial Training',d:'Internship at power plants, substations, electrical contracting firms. Understanding industrial equipment is crucial.'},{t:'Campus Placements',d:'Core electrical companies: Siemens, ABB, Schneider Electric, TATA Power, Adani Power, state electricity boards.'},{t:'Higher Options',d:'M.Tech Power Systems (GATE), MBA Energy Management, or GATE → PSU directly.'}],careers:['Electrical Engineer — ₹4–12 LPA','Power Engineer — ₹5–15 LPA','PSU Engineer (GATE) — ₹8–20 LPA','Control Systems Engineer — ₹6–16 LPA','Maintenance Engineer — ₹5–12 LPA'],certifications:['GATE Electrical','Siemens Certified Engineer','ABB Technical Training']},
-    diploma_ece_eng:    {title:'B.Tech — Electronics & Communication (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in ECE with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU, NIT, IIT (GATE route)',steps:[{t:'Lateral Entry to B.Tech ECE 2nd Year',d:'Subjects: VLSI Design, Digital Signal Processing, Embedded Systems, Communication Systems, Microprocessors.'},{t:'Specialize in Embedded or VLSI',d:'Embedded systems (IoT, Arduino, STM32) or VLSI design (chip design) are high-demand niches. Pick one and go deep.'},{t:'DRDO, ISRO, BSNL Preparation',d:'Government research organizations actively hire ECE engineers. GATE score is needed for PSU and research roles.'},{t:'Tech Company Placements',d:'Qualcomm, Intel, Texas Instruments, Samsung (chip design), Bosch (embedded) — top recruiters for ECE engineers.'},{t:'Higher Options',d:'M.Tech VLSI/Embedded (GATE), MS abroad in EE, or MBA Tech Management.'}],careers:['Embedded Systems Engineer — ₹5–15 LPA','VLSI Design Engineer — ₹8–25 LPA','Telecom Engineer — ₹5–12 LPA','DRDO/ISRO Scientist — ₹8–20 LPA','IoT Developer — ₹6–18 LPA'],certifications:['ARM Embedded Systems Certificate','VLSI Design Course (NPTEL)','Cisco CCNA (Networking)']},
-    '12th_pcm_eng':     {title:'B.Tech — Engineering via JEE',duration:'4 Years',eligibility:'12th PCM with 75%+ (JEE) or 60%+ (State CET)',entrance:'JEE Main, JEE Advanced (IIT), State CET (UPSEE, MHT-CET)',colleges:'IIT, NIT, IIIT, State Government/Private Engineering Colleges',steps:[{t:'Prepare for JEE Main / State CET',d:'JEE Main: 300 marks (Physics, Chemistry, Maths). JEE Advanced for IIT. State CET for state colleges. Start preparation in 11th itself — 1.5–2 years is ideal.'},{t:'Choose Branch Wisely',d:'CS/IT → highest packages. ECE, Mechanical, Civil → core industry. Choose based on interest, not just package. Wrong branch = regret.'},{t:'Complete B.Tech (4 years)',d:'Build strong fundamentals. Do internships from 2nd year. Maintain CGPA above 7.5 for top companies. Do at least 2 good projects.'},{t:'Campus Placements / GATE',d:'Top companies: Google, Microsoft, Amazon, Flipkart (CS). L&T, TATA (Mechanical/Civil). GATE → M.Tech at IIT or PSU jobs.'},{t:'Post B.Tech Paths',d:'M.Tech (GATE), MBA (CAT), MS Abroad (GRE/IELTS), Startup, or direct industry job at ₹6–50 LPA.'}],careers:['Software Engineer — ₹6–50 LPA','Data Scientist — ₹8–30 LPA','Mechanical Engineer — ₹5–18 LPA','Civil Engineer — ₹5–15 LPA','Research Scientist — ₹8–20 LPA'],certifications:['JEE Main Score','AWS/Google Cloud (for CS)','GATE Score (for M.Tech/PSU)']},
-    '12th_pcb_med':     {title:'MBBS / BDS / B.Pharma / B.Sc Nursing',duration:'5.5 / 5 / 4 / 4 Years',eligibility:'12th PCB with 50%+ (60%+ for NEET)',entrance:'NEET-UG (mandatory for MBBS, BDS, BAMS, BHMS)',colleges:'Government Medical Colleges (NEET rank), Private Medical Colleges, Deemed Universities',steps:[{t:'Prepare for NEET-UG',d:'NEET: 720 marks — Biology (360), Physics (180), Chemistry (180). Start 11th itself. Consistent study for 2 years is essential. Target 600+ for government college.'},{t:'Choose Your Medical Course',d:'MBBS (Doctor) — 5.5 years. BDS (Dentist) — 5 years. BAMS/BHMS (Ayurveda/Homeopathy) — 5.5 years. B.Pharma — 4 years. B.Sc Nursing — 4 years.'},{t:'Complete the Degree + Internship',d:'MBBS: 4.5 years academics + 1 year mandatory internship. Rotate through different departments. NExT exam (new MBBS licensing exam).'},{t:'MD/MS Specialization (Optional)',d:'After MBBS: appear for NEET-PG. Get specialization in Surgery, Medicine, Pediatrics, Ortho, etc. Government hospital residency available.'},{t:'Career & Earnings',d:'Government Doctor: ₹8–15 LPA. Private Hospital: ₹12–40 LPA. Super-specialist: ₹25–1 Crore+. Own clinic: unlimited.'}],careers:['Doctor (MBBS) — ₹8–40 LPA+','Dentist — ₹6–25 LPA','Pharmacist — ₹4–12 LPA','Nurse — ₹4–10 LPA','Medical Researcher — ₹6–20 LPA'],certifications:['NEET-UG Score','NExT (National Exit Test for MBBS)','NEET-PG (for MD/MS)']},
-    '12th_commerce_ca': {title:'CA / B.Com / BBA + MBA',duration:'3–5 Years depending on path',eligibility:'12th Commerce (any %)',entrance:'CA Foundation (ICAI), CUET for B.Com/BBA, CAT/MAT for MBA',colleges:'SRCC, LSR, Christ University (B.Com), IIM (MBA via CAT)',steps:[{t:'Choose Your Path: CA or Degree',d:'CA Path: CA Foundation after 12th → Intermediate → Final. 4–5 years. Highest-paid accounting profession. OR B.Com / BBA (3 years) → MBA (2 years) → Management career.'},{t:'CA Foundation Exam',d:'4 papers: Accounting, Business Laws, Business Maths/Stats, Business Economics. Attempt after 12th. 2 attempts per year.'},{t:'CA Intermediate + Articleship',d:'8 papers in 2 groups. Simultaneously do 3-year Articleship (paid internship) at CA firm. Practical experience.'},{t:'CA Final + CPA/CFA (Optional)',d:'CA Final: 8 papers. Pass all → become CA. Add CFA (finance) or CPA (international accounting) for global roles.'},{t:'Career & Earnings',d:'Fresher CA: ₹6–12 LPA. Big 4 (Deloitte, EY, PwC, KPMG): ₹8–18 LPA. CFO level: ₹50 LPA–2 Crore.'}],careers:['Chartered Accountant — ₹6–50 LPA','Financial Analyst — ₹5–20 LPA','Investment Banker — ₹10–50 LPA','Business Analyst — ₹6–18 LPA','CFO / Finance Director — ₹30 LPA+'],certifications:['CA (ICAI)','CFA (CFA Institute)','CPA (AICPA)','FRM (GARP)']},
-    '12th_arts_law':    {title:'BA + LLB / UPSC / Journalism / Design',duration:'3–5 Years',eligibility:'12th Arts/any stream',entrance:'CLAT (Law), UPSC CSE (IAS), CUET (BA), NID/NIFT (Design)',colleges:'NLU (Law via CLAT), DU/JNU (BA), NIFT/NID (Design), IIMC (Journalism)',steps:[{t:'Choose Your Direction',d:'Law: BA+LLB (5yr integrated) via CLAT. IAS: BA + UPSC preparation (2–3 years). Journalism: BJMC (3yr). Design: NIFT/NID entrance + 4yr degree. Teaching: BA + B.Ed.'},{t:'CLAT for Law / NLU',d:'CLAT: English, GK, Legal Reasoning, Logical Reasoning, Maths. 150 questions. Top NLUs: NLSIU Bangalore, NLU Delhi, NALSAR Hyderabad. Corporate law is highest paying.'},{t:'BA + UPSC Preparation',d:'BA in History/Poli Sci/Sociology. Simultaneously start UPSC prelims prep. Prelims → Mains → Interview. Average 3–5 attempts. IAS is life-changing.'},{t:'Creative Fields: NIFT/NID',d:'NIFT Entrance: Creative Ability + General Ability test. NID: Design Aptitude Test. Fashion Design, Product Design, UX Design — high-growth creative careers.'},{t:'Career & Earnings',d:'IAS: ₹56k/month + perks + power. Lawyer: ₹5–50 LPA (senior corporate). Journalist: ₹4–15 LPA. Fashion Designer: ₹5–25 LPA.'}],careers:['IAS/IPS Officer — ₹8–18 LPA + perks','Lawyer (Corporate) — ₹8–50 LPA','Journalist — ₹4–15 LPA','Fashion Designer — ₹5–25 LPA','UX Designer — ₹6–20 LPA'],certifications:['CLAT Score (Law)','UPSC CSE (IAS)','NIFT/NID Entrance','Bar Council Enrollment (Lawyer)']},
+// ══ ROADMAP DATA ══
+var ROADMAP={
+  higher:{
+    diploma_cs_eng:{title:'B.Tech — Computer Science (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in CS/IT with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU affiliated colleges, NITs (limited seats)',steps:[{t:'Apply for Lateral Entry Admission',d:'After Diploma, you get direct admission to 2nd year of B.Tech. No need to start from 1st year. Entrance exam: UPSEE Lateral Entry or state-specific CET.'},{t:'Complete B.Tech in 2 Years',d:'Core subjects: Data Structures, Algorithms, DBMS, OS, Computer Networks, Software Engineering. Focus on projects and internships.'},{t:'Build Your Portfolio',d:'Contribute to GitHub, build 2–3 real-world projects, participate in hackathons. Recruiters value practical experience over marks.'},{t:'Campus Placements / Off-campus',d:'Top companies: TCS, Infosys, Wipro, Accenture, and product companies like Google, Amazon (via off-campus).'},{t:'Post B.Tech Options',d:'M.Tech (GATE), MBA (CAT), MS Abroad (GRE), or direct industry job.'}],careers:['Software Engineer — ₹4–18 LPA','Data Analyst — ₹5–15 LPA','Web Developer — ₹4–12 LPA','Cloud Engineer — ₹6–20 LPA','Product Manager (MBA) — ₹12–35 LPA'],certifications:['AWS Certified Solutions Architect','Google Associate Cloud Engineer','Meta Front-End Developer Certificate']},
+    diploma_mech_eng:{title:'B.Tech — Mechanical Engineering (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in Mechanical with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU, NIT Trichy (limited), state engineering colleges',steps:[{t:'Lateral Entry into B.Tech Mechanical 2nd Year',d:'Apply through UPSEE Lateral Entry. Subjects: Thermodynamics, Fluid Mechanics, Manufacturing Processes, CAD/CAM.'},{t:'Develop CAD & Simulation Skills',d:'Master AutoCAD, SolidWorks, ANSYS. These are must-have tools for mechanical engineers in industry.'},{t:'Industrial Training & Internship',d:'Do internship at manufacturing companies — automobile, FMCG, steel plants. Industrial exposure is critical for placements.'},{t:'Campus Placements',d:'Core companies: TATA Motors, Maruti, Mahindra, L&T, BHEL, NTPC. Package: ₹3.5–8 LPA for core jobs.'},{t:'Higher Study Options',d:'M.Tech (GATE), MBA Operations/Supply Chain, MS in Mechanical Engineering abroad.'}],careers:['Mechanical Engineer — ₹4–12 LPA','Design Engineer — ₹5–14 LPA','Production Manager — ₹6–15 LPA','Automobile Engineer — ₹4–10 LPA','GATE → PSU (BHEL, NTPC, ONGC) — ₹8–20 LPA'],certifications:['SolidWorks CSWA Certificate','ANSYS Certification','Six Sigma Green Belt']},
+    diploma_civil_eng:{title:'B.Tech — Civil Engineering (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in Civil with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU, state engineering colleges, NITs',steps:[{t:'Lateral Entry into B.Tech Civil 2nd Year',d:'Subjects: Structural Analysis, RCC Design, Geotechnical Engineering, Transportation Engineering, Surveying.'},{t:'Master Design Software',d:'AutoCAD, STAAD Pro, REVIT, ETABS — these are essential for civil engineering jobs and consultancy work.'},{t:'Government Job Preparation',d:'Prepare for SSC JE, UPPSC AE, PWD Junior Engineer exams alongside your degree. High demand for civil engineers in govt sector.'},{t:'Construction Industry Placement',d:'Companies: L&T, DLF, Shapoorji Pallonji, Consulting firms. Site Engineer, Project Manager roles.'},{t:'Higher Options',d:'M.Tech (GATE), MBA Infrastructure Management, or start your own consultancy.'}],careers:['Site Engineer — ₹4–10 LPA','Structural Designer — ₹5–14 LPA','Project Manager — ₹8–20 LPA','Govt Jr. Engineer (JE) — ₹6–12 LPA','Urban Planner — ₹6–15 LPA'],certifications:['AutoCAD Certified Professional','PMP (Project Management)','LEED Green Associate']},
+    diploma_elec_eng:{title:'B.Tech — Electrical Engineering (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in Electrical with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU, NIT, state engineering colleges',steps:[{t:'Lateral Entry to B.Tech Electrical 2nd Year',d:'Subjects: Power Systems, Electrical Machines, Control Systems, Power Electronics, High Voltage Engineering.'},{t:'Focus on PSU & Govt Exams',d:'GATE score opens doors to BHEL, NTPC, PGCIL, UPPCL — top paying government jobs for electrical engineers.'},{t:'Industrial Training',d:'Internship at power plants, substations, electrical contracting firms. Understanding industrial equipment is crucial.'},{t:'Campus Placements',d:'Core electrical companies: Siemens, ABB, Schneider Electric, TATA Power, Adani Power, state electricity boards.'},{t:'Higher Options',d:'M.Tech Power Systems (GATE), MBA Energy Management, or GATE → PSU directly.'}],careers:['Electrical Engineer — ₹4–12 LPA','Power Engineer — ₹5–15 LPA','PSU Engineer (GATE) — ₹8–20 LPA','Control Systems Engineer — ₹6–16 LPA','Maintenance Engineer — ₹5–12 LPA'],certifications:['GATE Electrical','Siemens Certified Engineer','ABB Technical Training']},
+    diploma_ece_eng:{title:'B.Tech — Electronics & Communication (Lateral Entry)',duration:'2 Years',eligibility:'Diploma in ECE with 45%+',entrance:'UPSEE/State Lateral Entry CET',colleges:'AKTU, NIT, IIT (GATE route)',steps:[{t:'Lateral Entry to B.Tech ECE 2nd Year',d:'Subjects: VLSI Design, Digital Signal Processing, Embedded Systems, Communication Systems, Microprocessors.'},{t:'Specialize in Embedded or VLSI',d:'Embedded systems (IoT, Arduino, STM32) or VLSI design (chip design) are high-demand niches. Pick one and go deep.'},{t:'DRDO, ISRO, BSNL Preparation',d:'Government research organizations actively hire ECE engineers. GATE score is needed for PSU and research roles.'},{t:'Tech Company Placements',d:'Qualcomm, Intel, Texas Instruments, Samsung (chip design), Bosch (embedded) — top recruiters for ECE engineers.'},{t:'Higher Options',d:'M.Tech VLSI/Embedded (GATE), MS abroad in EE, or MBA Tech Management.'}],careers:['Embedded Systems Engineer — ₹5–15 LPA','VLSI Design Engineer — ₹8–25 LPA','Telecom Engineer — ₹5–12 LPA','DRDO/ISRO Scientist — ₹8–20 LPA','IoT Developer — ₹6–18 LPA'],certifications:['ARM Embedded Systems Certificate','VLSI Design Course (NPTEL)','Cisco CCNA (Networking)']},
+    '12th_pcm_eng':{title:'B.Tech — Engineering via JEE',duration:'4 Years',eligibility:'12th PCM with 75%+ (JEE) or 60%+ (State CET)',entrance:'JEE Main, JEE Advanced (IIT), State CET (UPSEE, MHT-CET)',colleges:'IIT, NIT, IIIT, State Government/Private Engineering Colleges',steps:[{t:'Prepare for JEE Main / State CET',d:'JEE Main: 300 marks (Physics, Chemistry, Maths). JEE Advanced for IIT. State CET for state colleges. Start prep in 11th — 1.5–2 years is ideal.'},{t:'Choose Branch Wisely',d:'CS/IT → highest packages. ECE, Mechanical, Civil → core industry. Choose based on interest, not just package. Wrong branch = regret.'},{t:'Complete B.Tech (4 years)',d:'Build strong fundamentals. Do internships from 2nd year. Maintain CGPA above 7.5 for top companies. Do at least 2 good projects.'},{t:'Campus Placements / GATE',d:'Top companies: Google, Microsoft, Amazon, Flipkart (CS). L&T, TATA (Mechanical/Civil). GATE → M.Tech at IIT or PSU jobs.'},{t:'Post B.Tech Paths',d:'M.Tech (GATE), MBA (CAT), MS Abroad (GRE/IELTS), Startup, or direct industry job at ₹6–50 LPA.'}],careers:['Software Engineer — ₹6–50 LPA','Data Scientist — ₹8–30 LPA','Mechanical Engineer — ₹5–18 LPA','Civil Engineer — ₹5–15 LPA','Research Scientist — ₹8–20 LPA'],certifications:['JEE Main Score','AWS/Google Cloud (for CS)','GATE Score (for M.Tech/PSU)']},
+    '12th_pcb_med':{title:'MBBS / BDS / B.Pharma / B.Sc Nursing',duration:'5.5 / 5 / 4 / 4 Years',eligibility:'12th PCB with 50%+ (60%+ for NEET)',entrance:'NEET-UG (mandatory for MBBS, BDS, BAMS, BHMS)',colleges:'Government Medical Colleges (NEET rank), Private Medical Colleges, Deemed Universities',steps:[{t:'Prepare for NEET-UG',d:'NEET: 720 marks — Biology (360), Physics (180), Chemistry (180). Start 11th itself. Target 600+ for government college.'},{t:'Choose Your Medical Course',d:'MBBS (Doctor) — 5.5 years. BDS (Dentist) — 5 years. BAMS/BHMS — 5.5 years. B.Pharma — 4 years. B.Sc Nursing — 4 years.'},{t:'Complete the Degree + Internship',d:'MBBS: 4.5 years academics + 1 year mandatory internship. NExT exam (new MBBS licensing exam).'},{t:'MD/MS Specialization (Optional)',d:'After MBBS: appear for NEET-PG. Get specialization in Surgery, Medicine, Pediatrics, Ortho, etc.'},{t:'Career & Earnings',d:'Government Doctor: ₹8–15 LPA. Private Hospital: ₹12–40 LPA. Super-specialist: ₹25–1 Crore+. Own clinic: unlimited.'}],careers:['Doctor (MBBS) — ₹8–40 LPA+','Dentist — ₹6–25 LPA','Pharmacist — ₹4–12 LPA','Nurse — ₹4–10 LPA','Medical Researcher — ₹6–20 LPA'],certifications:['NEET-UG Score','NExT (National Exit Test for MBBS)','NEET-PG (for MD/MS)']},
+    '12th_commerce_ca':{title:'CA / B.Com / BBA + MBA',duration:'3–5 Years depending on path',eligibility:'12th Commerce (any %)',entrance:'CA Foundation (ICAI), CUET for B.Com/BBA, CAT/MAT for MBA',colleges:'SRCC, LSR, Christ University (B.Com), IIM (MBA via CAT)',steps:[{t:'Choose Your Path: CA or Degree',d:'CA Path: CA Foundation after 12th → Intermediate → Final. 4–5 years. OR B.Com / BBA (3 years) → MBA (2 years).'},{t:'CA Foundation Exam',d:'4 papers: Accounting, Business Laws, Business Maths/Stats, Business Economics. 2 attempts per year.'},{t:'CA Intermediate + Articleship',d:'8 papers in 2 groups. Simultaneously do 3-year Articleship (paid internship) at CA firm.'},{t:'CA Final + CPA/CFA (Optional)',d:'CA Final: 8 papers. Pass all → become CA. Add CFA or CPA for global roles.'},{t:'Career & Earnings',d:'Fresher CA: ₹6–12 LPA. Big 4 (Deloitte, EY, PwC, KPMG): ₹8–18 LPA. CFO level: ₹50 LPA–2 Crore.'}],careers:['Chartered Accountant — ₹6–50 LPA','Financial Analyst — ₹5–20 LPA','Investment Banker — ₹10–50 LPA','Business Analyst — ₹6–18 LPA','CFO / Finance Director — ₹30 LPA+'],certifications:['CA (ICAI)','CFA (CFA Institute)','CPA (AICPA)','FRM (GARP)']},
+    '12th_arts_law':{title:'BA + LLB / UPSC / Journalism / Design',duration:'3–5 Years',eligibility:'12th Arts/any stream',entrance:'CLAT (Law), UPSC CSE (IAS), CUET (BA), NID/NIFT (Design)',colleges:'NLU (Law via CLAT), DU/JNU (BA), NIFT/NID (Design), IIMC (Journalism)',steps:[{t:'Choose Your Direction',d:'Law: BA+LLB (5yr integrated) via CLAT. IAS: BA + UPSC preparation (2–3 years). Journalism: BJMC (3yr). Design: NIFT/NID entrance + 4yr degree.'},{t:'CLAT for Law / NLU',d:'CLAT: English, GK, Legal Reasoning, Logical Reasoning, Maths. 150 questions. Top NLUs: NLSIU Bangalore, NLU Delhi, NALSAR Hyderabad.'},{t:'BA + UPSC Preparation',d:'BA in History/Poli Sci/Sociology. Start UPSC prelims prep simultaneously. Prelims → Mains → Interview. Average 3–5 attempts.'},{t:'Creative Fields: NIFT/NID',d:'NIFT Entrance: Creative Ability + General Ability test. Fashion Design, Product Design, UX Design — high-growth creative careers.'},{t:'Career & Earnings',d:'IAS: ₹56k/month + perks. Lawyer: ₹5–50 LPA (senior corporate). Journalist: ₹4–15 LPA. Fashion Designer: ₹5–25 LPA.'}],careers:['IAS/IPS Officer — ₹8–18 LPA + perks','Lawyer (Corporate) — ₹8–50 LPA','Journalist — ₹4–15 LPA','Fashion Designer — ₹5–25 LPA','UX Designer — ₹6–20 LPA'],certifications:['CLAT Score (Law)','UPSC CSE (IAS)','NIFT/NID Entrance','Bar Council Enrollment (Lawyer)']}
   },
-  direct: {
-    diploma_cs:      {title:'Direct Career — Diploma in CS/IT',jobs:[{role:'Junior Web Developer',sal:'₹15,000–28,000/month',how:'Learn HTML, CSS, JavaScript, React. Build portfolio projects. Apply on Naukri, LinkedIn, Internshala.',certs:['FreeCodeCamp Web Dev Certificate','Coursera Meta Front-End Certificate']},{role:'IT Support Engineer',sal:'₹12,000–22,000/month',how:'CompTIA A+ or CCNA certification helps. Apply to IT companies, BPO companies, startups.',certs:['CompTIA A+','Google IT Support Certificate']},{role:'Hardware / Network Technician',sal:'₹10,000–20,000/month',how:'CCNA certification recommended. ISPs, networking companies, corporate IT departments hire actively.',certs:['Cisco CCNA','CompTIA Network+']},{role:'Data Entry / Junior Analyst',sal:'₹10,000–18,000/month',how:'Excel, basic SQL skills. Entry-level role in any company. Good starting point.',certs:['Microsoft Excel MOS Certification']}],upskill:'Even without higher degree, get AWS Cloud Practitioner or Google Associate certification — salary doubles to ₹30–50k/month within 2 years.'},
-    diploma_mech:    {title:'Direct Career — Diploma in Mechanical',jobs:[{role:'Junior Mechanical Engineer',sal:'₹15,000–25,000/month',how:'Apply to manufacturing plants, automobile workshops, fabrication units. AutoCAD skills required.',certs:['SolidWorks CSWA','AutoCAD Certified']},{role:'Production Supervisor',sal:'₹18,000–35,000/month',how:'Factory floor supervision. Manage production lines, quality checks. Experience-based growth.',certs:['Six Sigma Yellow Belt']},{role:'CAD Operator / Draughtsman',sal:'₹15,000–28,000/month',how:'AutoCAD, SolidWorks proficiency. Design firms, construction companies, manufacturing units.',certs:['AutoCAD Certified Professional']},{role:'Govt Junior Engineer (JE)',sal:'₹25,000–45,000/month',how:'Appear for SSC JE, UPSSSC JE, Railways JE exams. Diploma holders are eligible. Stable govt job.',certs:['SSC JE Exam','State PWD JE Exam']}],upskill:'SSC JE exam preparation can get you ₹30–45k/month stable government job within 1–2 years.'},
-    diploma_civil:   {title:'Direct Career — Diploma in Civil',jobs:[{role:'Site Supervisor',sal:'₹15,000–30,000/month',how:'Construction sites, real estate developers, government projects. AutoCAD knowledge helps.',certs:['AutoCAD Civil 3D']},{role:'Draughtsman / CAD Operator',sal:'₹15,000–28,000/month',how:'Architectural firms, structural design offices. AutoCAD, REVIT skills essential.',certs:['AutoCAD Certified','REVIT Professional']},{role:'Quantity Surveyor (QS)',sal:'₹18,000–35,000/month',how:'Estimate construction costs, prepare BOQs. Real estate and construction companies.',certs:['RICS Certification (advanced)']},{role:'Govt Jr. Engineer (JE)',sal:'₹25,000–45,000/month',how:'PWD, CPWD, Jal Nigam, NHAI, Railways JE exams. Diploma holders eligible.',certs:['SSC JE','UPPSC JE']}],upskill:'Government JE exams are the best bet — stable job, good pay, and pension.'},
-    diploma_elec:    {title:'Direct Career — Diploma in Electrical',jobs:[{role:'Electrical Technician',sal:'₹15,000–28,000/month',how:'Factories, hospitals, commercial buildings. Electrical maintenance, wiring, panel work.',certs:['ITI Wireman Certificate']},{role:'Maintenance Engineer',sal:'₹20,000–35,000/month',how:'Industrial maintenance — motors, transformers, switchgear. Manufacturing plants, power plants.',certs:['EEPC Certification']},{role:'Electrical Contractor',sal:'Variable (₹25k–80k/month)',how:'Get contractor license. Take residential/commercial electrical projects independently.',certs:['Electrical Contractor License (State Board)']},{role:'Govt JE — Electricity Board',sal:'₹25,000–45,000/month',how:'UPPCL, MPEB, MSEB JE exams. Diploma holders eligible. Stable government job.',certs:['State Electricity Board JE Exam']}],upskill:'State Electricity Board JE is the top choice — ₹35–45k/month + pension.'},
-    diploma_ece:     {title:'Direct Career — Diploma in ECE',jobs:[{role:'Electronics / Service Technician',sal:'₹12,000–22,000/month',how:'Mobile repair shops, electronics service centers, consumer electronics companies.',certs:['Mobile Repairing Course']},{role:'Field Service Engineer',sal:'₹15,000–28,000/month',how:'BSNL, Airtel, Jio, telecom equipment companies. Network maintenance, tower work.',certs:['CCNA','Telecom Tower Technician']},{role:'PCB Design Technician',sal:'₹15,000–25,000/month',how:'Electronics manufacturing companies, EMS firms. PCB design, soldering, testing.',certs:['IPC Soldering Certification']},{role:'Govt Technician Posts',sal:'₹20,000–38,000/month',how:'BSNL JTO, Railways Signal Technician, DRDO Technician B exams.',certs:['BSNL JTO Exam','RRB Technician Exam']}],upskill:'BSNL JTO or RRB Technician exam — stable government job with growth.'},
-    '12th_pcm':      {title:'Direct Career — After 12th PCM (No Degree)',jobs:[{role:'NDA / Defence Officer',sal:'₹56,000–2,10,000/month',how:'NDA exam after 12th (for boys under 19.5). Indian Army, Navy, Air Force officer. Join after 12th directly.',certs:['NDA Written + SSB Interview']},{role:'Bank PO / Clerk',sal:'₹20,000–38,000/month',how:'IBPS PO, SBI PO, IBPS Clerk exams. Graduates preferred but some exams allow 12th pass.',certs:['IBPS PO/Clerk Exam']},{role:'ITI + Apprenticeship',sal:'₹12,000–20,000/month',how:'ITI (1 year) in fitter, electrician, machinist. Then NCVT apprenticeship in big companies.',certs:['NCVT Certificate']},{role:'Polytechnic Diploma (Recommended)',sal:'After 3yr diploma: ₹15,000–35,000/month',how:'If not going for degree, Diploma in CS/Mechanical is highly recommended. Better than direct 12th pass.',certs:['Polytechnic Diploma Certificate']}],upskill:'NDA is the best direct option after 12th PCM without a degree. Otherwise, completing a degree is strongly recommended.'},
-    '12th_pcb':      {title:'Direct Career — After 12th PCB (No Degree)',jobs:[{role:'Nursing (GNM / ANM)',sal:'₹15,000–30,000/month',how:'GNM (3.5yr) or ANM (2yr) nursing courses — available directly after 12th PCB. Hospitals have constant demand.',certs:['GNM Certificate','Nursing Council Registration']},{role:'Medical Lab Technician',sal:'₹12,000–22,000/month',how:'DMLT (Diploma Medical Lab Technology) — 2yr course after 12th. Pathology labs, hospitals.',certs:['DMLT Certificate']},{role:'Pharmacy Technician',sal:'₹12,000–20,000/month',how:'D.Pharma (2yr diploma) after 12th PCB/PCM. Drug stores, hospital pharmacies.',certs:['D.Pharma Diploma','Pharmacy Council Registration']},{role:'Paramedic / Emergency Technician',sal:'₹12,000–25,000/month',how:'DOTT or B.Sc Emergency Medical Technology. Ambulance services, hospitals.',certs:['BLS/ACLS Certification','EMT Certificate']}],upskill:'GNM Nursing is the fastest direct career — hospitals pay ₹20–30k/month + job security.'},
-    '12th_commerce': {title:'Direct Career — After 12th Commerce (No Degree)',jobs:[{role:'Accounts Assistant',sal:'₹12,000–22,000/month',how:'Tally software + basic accounting knowledge. Small businesses, CA firms, shops.',certs:['Tally ERP 9 Certificate','GST Practitioner Course']},{role:'Bank Clerk / PO',sal:'₹20,000–35,000/month',how:'IBPS Clerk, SBI Clerk, RRB Office Assistant exams. Open to 12th pass / graduates.',certs:['IBPS Clerk Exam','SBI Clerk Exam']},{role:'Insurance / Sales Executive',sal:'₹15,000–30,000/month + incentives',how:'LIC, HDFC Life, SBI Life agent. Commission-based — high earning potential.',certs:['IRDA License (Insurance)']},{role:'Data Entry / Office Coordinator',sal:'₹12,000–20,000/month',how:'MS Office proficiency. Any office, MNC back office, BPO.',certs:['MS Office MOS Certificate']}],upskill:'Pursuing B.Com even while working (distance education from IGNOU) + CA Foundation is the best parallel track.'},
-    '12th_arts':     {title:'Direct Career — After 12th Arts (No Degree)',jobs:[{role:'Content Writer / Copywriter',sal:'₹15,000–35,000/month',how:'Strong English + writing skills. Freelance on Upwork, Fiverr, or join digital marketing agencies.',certs:['HubSpot Content Marketing Certificate','Google Digital Garage']},{role:'Social Media Manager',sal:'₹15,000–30,000/month',how:'Manage Instagram, Facebook, LinkedIn for brands. Short courses available. High demand.',certs:['Facebook Blueprint Certificate','Hootsuite Social Media Certificate']},{role:'Graphic Designer',sal:'₹15,000–35,000/month',how:'Learn Canva, Photoshop, Illustrator. Freelance or join agencies. Portfolio is everything.',certs:['Adobe Certified Professional','Canva Design Certificate']},{role:'Govt Exam — SSC / Railway',sal:'₹20,000–45,000/month',how:'SSC CHSL (12th pass eligible), Railway NTPC, Group D — stable government jobs.',certs:['SSC CHSL Exam','RRB NTPC Exam']}],upskill:'SSC CHSL exam is the best stable career after 12th Arts. Freelance writing/design is best for income growth.'},
+  direct:{
+    diploma_cs:{title:'Direct Career — Diploma in CS/IT',jobs:[{role:'Junior Web Developer',sal:'₹15,000–28,000/month',how:'Learn HTML, CSS, JavaScript, React. Build portfolio projects. Apply on Naukri, LinkedIn, Internshala.',certs:['FreeCodeCamp Web Dev Certificate','Meta Front-End Certificate']},{role:'IT Support Engineer',sal:'₹12,000–22,000/month',how:'CompTIA A+ or CCNA certification helps. Apply to IT companies, BPO companies, startups.',certs:['CompTIA A+','Google IT Support Certificate']},{role:'Hardware / Network Technician',sal:'₹10,000–20,000/month',how:'CCNA certification recommended. ISPs, networking companies, corporate IT departments hire actively.',certs:['Cisco CCNA','CompTIA Network+']},{role:'Data Entry / Junior Analyst',sal:'₹10,000–18,000/month',how:'Excel, basic SQL skills. Entry-level role in any company. Good starting point.',certs:['Microsoft Excel MOS Certification']}],upskill:'Even without higher degree, get AWS Cloud Practitioner or Google Associate certification — salary doubles to ₹30–50k/month within 2 years.'},
+    diploma_mech:{title:'Direct Career — Diploma in Mechanical',jobs:[{role:'Junior Mechanical Engineer',sal:'₹15,000–25,000/month',how:'Apply to manufacturing plants, automobile workshops, fabrication units. AutoCAD skills required.',certs:['SolidWorks CSWA','AutoCAD Certified']},{role:'Production Supervisor',sal:'₹18,000–35,000/month',how:'Factory floor supervision. Manage production lines, quality checks. Experience-based growth.',certs:['Six Sigma Yellow Belt']},{role:'CAD Operator / Draughtsman',sal:'₹15,000–28,000/month',how:'AutoCAD, SolidWorks proficiency. Design firms, construction companies, manufacturing units.',certs:['AutoCAD Certified Professional']},{role:'Govt Junior Engineer (JE)',sal:'₹25,000–45,000/month',how:'Appear for SSC JE, UPSSSC JE, Railways JE exams. Diploma holders are eligible.',certs:['SSC JE Exam','State PWD JE Exam']}],upskill:'SSC JE exam preparation can get you ₹30–45k/month stable government job within 1–2 years.'},
+    diploma_civil:{title:'Direct Career — Diploma in Civil',jobs:[{role:'Site Supervisor',sal:'₹15,000–30,000/month',how:'Construction sites, real estate developers, government projects.',certs:['AutoCAD Civil 3D']},{role:'Draughtsman / CAD Operator',sal:'₹15,000–28,000/month',how:'Architectural firms, structural design offices. AutoCAD, REVIT skills essential.',certs:['AutoCAD Certified','REVIT Professional']},{role:'Quantity Surveyor (QS)',sal:'₹18,000–35,000/month',how:'Estimate construction costs, prepare BOQs. Real estate and construction companies.',certs:['RICS Certification']},{role:'Govt Jr. Engineer (JE)',sal:'₹25,000–45,000/month',how:'PWD, CPWD, Jal Nigam, NHAI, Railways JE exams. Diploma holders eligible.',certs:['SSC JE','UPPSC JE']}],upskill:'Government JE exams are the best bet — stable job, good pay, and pension.'},
+    diploma_elec:{title:'Direct Career — Diploma in Electrical',jobs:[{role:'Electrical Technician',sal:'₹15,000–28,000/month',how:'Factories, hospitals, commercial buildings. Electrical maintenance, wiring, panel work.',certs:['ITI Wireman Certificate']},{role:'Maintenance Engineer',sal:'₹20,000–35,000/month',how:'Industrial maintenance — motors, transformers, switchgear. Manufacturing plants, power plants.',certs:['EEPC Certification']},{role:'Electrical Contractor',sal:'Variable (₹25k–80k/month)',how:'Get contractor license. Take residential/commercial electrical projects independently.',certs:['Electrical Contractor License']},{role:'Govt JE — Electricity Board',sal:'₹25,000–45,000/month',how:'UPPCL, MPEB, MSEB JE exams. Diploma holders eligible. Stable government job.',certs:['State Electricity Board JE Exam']}],upskill:'State Electricity Board JE is the top choice — ₹35–45k/month + pension.'},
+    diploma_ece:{title:'Direct Career — Diploma in ECE',jobs:[{role:'Electronics / Service Technician',sal:'₹12,000–22,000/month',how:'Mobile repair shops, electronics service centers, consumer electronics companies.',certs:['Mobile Repairing Course']},{role:'Field Service Engineer',sal:'₹15,000–28,000/month',how:'BSNL, Airtel, Jio, telecom equipment companies. Network maintenance, tower work.',certs:['CCNA','Telecom Tower Technician']},{role:'PCB Design Technician',sal:'₹15,000–25,000/month',how:'Electronics manufacturing companies, EMS firms. PCB design, soldering, testing.',certs:['IPC Soldering Certification']},{role:'Govt Technician Posts',sal:'₹20,000–38,000/month',how:'BSNL JTO, Railways Signal Technician, DRDO Technician B exams.',certs:['BSNL JTO Exam','RRB Technician Exam']}],upskill:'BSNL JTO or RRB Technician exam — stable government job with growth.'},
+    '12th_pcm':{title:'Direct Career — After 12th PCM (No Degree)',jobs:[{role:'NDA / Defence Officer',sal:'₹56,000–2,10,000/month',how:'NDA exam after 12th (for boys under 19.5). Indian Army, Navy, Air Force officer.',certs:['NDA Written + SSB Interview']},{role:'Bank PO / Clerk',sal:'₹20,000–38,000/month',how:'IBPS PO, SBI PO, IBPS Clerk exams.',certs:['IBPS PO/Clerk Exam']},{role:'ITI + Apprenticeship',sal:'₹12,000–20,000/month',how:'ITI (1 year) in fitter, electrician, machinist. Then NCVT apprenticeship in big companies.',certs:['NCVT Certificate']},{role:'Polytechnic Diploma (Recommended)',sal:'After 3yr diploma: ₹15,000–35,000/month',how:'If not going for degree, Diploma in CS/Mechanical is highly recommended.',certs:['Polytechnic Diploma Certificate']}],upskill:'NDA is the best direct option after 12th PCM without a degree. Otherwise, completing a degree is strongly recommended.'},
+    '12th_pcb':{title:'Direct Career — After 12th PCB (No Degree)',jobs:[{role:'Nursing (GNM / ANM)',sal:'₹15,000–30,000/month',how:'GNM (3.5yr) or ANM (2yr) nursing courses — available directly after 12th PCB.',certs:['GNM Certificate','Nursing Council Registration']},{role:'Medical Lab Technician',sal:'₹12,000–22,000/month',how:'DMLT (Diploma Medical Lab Technology) — 2yr course after 12th. Pathology labs, hospitals.',certs:['DMLT Certificate']},{role:'Pharmacy Technician',sal:'₹12,000–20,000/month',how:'D.Pharma (2yr diploma) after 12th PCB/PCM. Drug stores, hospital pharmacies.',certs:['D.Pharma Diploma','Pharmacy Council Registration']},{role:'Paramedic / Emergency Technician',sal:'₹12,000–25,000/month',how:'DOTT or B.Sc Emergency Medical Technology. Ambulance services, hospitals.',certs:['BLS/ACLS Certification','EMT Certificate']}],upskill:'GNM Nursing is the fastest direct career — hospitals pay ₹20–30k/month + job security.'},
+    '12th_commerce':{title:'Direct Career — After 12th Commerce (No Degree)',jobs:[{role:'Accounts Assistant',sal:'₹12,000–22,000/month',how:'Tally software + basic accounting knowledge. Small businesses, CA firms, shops.',certs:['Tally ERP 9 Certificate','GST Practitioner Course']},{role:'Bank Clerk / PO',sal:'₹20,000–35,000/month',how:'IBPS Clerk, SBI Clerk, RRB Office Assistant exams.',certs:['IBPS Clerk Exam','SBI Clerk Exam']},{role:'Insurance / Sales Executive',sal:'₹15,000–30,000/month + incentives',how:'LIC, HDFC Life, SBI Life agent. Commission-based — high earning potential.',certs:['IRDA License (Insurance)']},{role:'Data Entry / Office Coordinator',sal:'₹12,000–20,000/month',how:'MS Office proficiency. Any office, MNC back office, BPO.',certs:['MS Office MOS Certificate']}],upskill:'Pursuing B.Com even while working (distance education from IGNOU) + CA Foundation is the best parallel track.'},
+    '12th_arts':{title:'Direct Career — After 12th Arts (No Degree)',jobs:[{role:'Content Writer / Copywriter',sal:'₹15,000–35,000/month',how:'Strong English + writing skills. Freelance on Upwork, Fiverr, or join digital marketing agencies.',certs:['HubSpot Content Marketing Certificate','Google Digital Garage']},{role:'Social Media Manager',sal:'₹15,000–30,000/month',how:'Manage Instagram, Facebook, LinkedIn for brands. Short courses available.',certs:['Facebook Blueprint Certificate','Hootsuite Social Media Certificate']},{role:'Graphic Designer',sal:'₹15,000–35,000/month',how:'Learn Canva, Photoshop, Illustrator. Freelance or join agencies. Portfolio is everything.',certs:['Adobe Certified Professional','Canva Design Certificate']},{role:'Govt Exam — SSC / Railway',sal:'₹20,000–45,000/month',how:'SSC CHSL (12th pass eligible), Railway NTPC, Group D — stable government jobs.',certs:['SSC CHSL Exam','RRB NTPC Exam']}],upskill:'SSC CHSL exam is the best stable career after 12th Arts. Freelance writing/design is best for income growth.'}
   }
 };
 
 function generateResult(){
-  // Collect higher education choices
-  var heIds = ['he_eng','he_med','he_ca','he_mba','he_law','he_design','he_bsc','he_upsc','he_notdecided'];
-  var ciIds = ['ci_tech','ci_mfg','ci_govt','ci_biz','ci_health','ci_creative'];
+  var heIds=['he_eng','he_med','he_ca','he_mba','he_law','he_design','he_bsc','he_upsc','he_notdecided'];
+  var ciIds=['ci_tech','ci_mfg','ci_govt','ci_biz','ci_health','ci_creative'];
 
   if(pathState.higher==='yes'){
-    pathState.heChoice = heIds.filter(id=>document.getElementById(id)&&document.getElementById(id).checked);
+    pathState.heChoice=heIds.filter(id=>{const el=document.getElementById(id);return el&&el.checked;});
     if(pathState.heChoice.length===0){document.getElementById('e_p4h').textContent='Please select at least one option.';return;}
   } else {
-    pathState.ciChoice = ciIds.filter(id=>document.getElementById(id)&&document.getElementById(id).checked);
+    pathState.ciChoice=ciIds.filter(id=>{const el=document.getElementById(id);return el&&el.checked;});
     if(pathState.ciChoice.length===0){document.getElementById('e_p4c').textContent='Please select at least one career domain.';return;}
   }
 
-  // Hide all path steps
-  ['ps1','ps2_diploma','ps2_12th','ps3','ps4_yes','ps4_no'].forEach(id=>document.getElementById(id).classList.add('hidden'));
-
-  var html = '';
+  var html='';
 
   if(pathState.higher==='yes'){
-    // Higher education roadmap
-    var key = '';
-    var base = pathState.base, branch = pathState.branch, stream = pathState.stream;
-    var choice = pathState.heChoice[0]; // primary choice
+    var key='';
+    var base=pathState.base,branch=pathState.branch,stream=pathState.stream;
+    var choice=pathState.heChoice[0];
 
     if(base==='diploma'){
       if(choice==='he_eng'){
@@ -878,17 +1054,15 @@ function generateResult(){
         else if(branch==='electronics') key='diploma_ece_eng';
         else key='diploma_cs_eng';
       } else if(choice==='he_med') key='12th_pcb_med';
-      else if(choice==='he_ca') key='12th_commerce_ca';
+      else if(choice==='he_ca'||choice==='he_mba') key='12th_commerce_ca';
       else if(choice==='he_law'||choice==='he_upsc'||choice==='he_design') key='12th_arts_law';
       else key='diploma_cs_eng';
     } else {
-      // 12th base
       if(stream==='pcm'){
         if(choice==='he_eng'||choice==='he_bsc'||choice==='he_notdecided') key='12th_pcm_eng';
         else if(choice==='he_med') key='12th_pcb_med';
         else if(choice==='he_ca'||choice==='he_mba') key='12th_commerce_ca';
-        else if(choice==='he_law'||choice==='he_upsc'||choice==='he_design') key='12th_arts_law';
-        else key='12th_pcm_eng';
+        else key='12th_arts_law';
       } else if(stream==='pcb'){
         if(choice==='he_med'||choice==='he_bsc'||choice==='he_notdecided') key='12th_pcb_med';
         else if(choice==='he_eng') key='12th_pcm_eng';
@@ -904,15 +1078,11 @@ function generateResult(){
       }
     }
 
-    var d = ROADMAP.higher[key];
-    if(!d){d=ROADMAP.higher['diploma_cs_eng'];}
-
-    html += buildHigherCard(d, pathState.pct, pathState.budget, pathState.base, branch, stream);
-
+    var d=ROADMAP.higher[key]||ROADMAP.higher['diploma_cs_eng'];
+    html+=buildHigherCard(d,pathState.pct,pathState.budget);
   } else {
-    // Direct job roadmap
-    var key2 = '';
-    var base=pathState.base, branch=pathState.branch, stream=pathState.stream;
+    var key2='';
+    var base=pathState.base,branch=pathState.branch,stream=pathState.stream;
     if(base==='diploma'){
       if(branch==='cs'||branch==='it') key2='diploma_cs';
       else if(branch==='mechanical') key2='diploma_mech';
@@ -926,36 +1096,44 @@ function generateResult(){
       else if(stream==='commerce') key2='12th_commerce';
       else key2='12th_arts';
     }
-    var d2 = ROADMAP.direct[key2];
-    if(!d2){d2=ROADMAP.direct['diploma_cs'];}
-    html += buildDirectCard(d2, pathState.pct, pathState.ciChoice);
+    var d2=ROADMAP.direct[key2]||ROADMAP.direct['diploma_cs'];
+    html+=buildDirectCard(d2,pathState.pct,pathState.ciChoice);
   }
 
-  // Summary card
-  html += buildSummaryCard();
+  html+=buildSummaryCard();
 
-  document.getElementById('path-result-content').innerHTML = html;
-  document.getElementById('path-result').style.display='block';
+  document.getElementById('path-result-content').innerHTML=html;
+  
+  // Show result, hide form
   document.getElementById('path-sec').classList.add('hidden');
-  document.getElementById('path-result').scrollIntoView({behavior:'smooth',block:'start'});
-  addHov('.career-chip,.pstep,.path-result-card');
+  document.getElementById('path-result').style.display='block';
+  
+  // Scroll to result
+  setTimeout(()=>{
+    document.getElementById('path-result').scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+  
+  // Animate bars
+  setTimeout(()=>{
+    document.querySelectorAll('.ofill-anim').forEach(el=>{
+      el.style.width=el.dataset.width;
+    });
+  },400);
 }
 
-function buildHigherCard(d, pct, budget, base, branch, stream){
-  var stepsHTML = d.steps.map((s,i)=>`
+function buildHigherCard(d,pct,budget){
+  var stepsHTML=d.steps.map((s,i)=>`
     <div class="pstep">
       <div class="pstep-num">${i+1}</div>
       <div><div class="pstep-title">${s.t}</div><div class="pstep-desc">${s.d}</div></div>
     </div>`).join('');
-  var careersHTML = d.careers.map(c=>`<span class="career-chip">💼 ${c}</span>`).join('');
-  var certsHTML = d.certifications.map(c=>`<span class="career-chip">📜 ${c}</span>`).join('');
-
-  var pctNote = pct>=75
-    ? '<strong style="color:#4ade80">✅ Your score is strong</strong> — You are eligible for top government and private colleges. Aim for the best.'
-    : pct>=55
-    ? '<strong style="color:#fbbf24">⚠️ Your score is moderate</strong> — Focus on entrance exam preparation. Many private colleges are accessible. Government colleges may need extra effort.'
-    : '<strong style="color:#f87171">⚠️ Score is on the lower side</strong> — Private colleges through management quota are an option. Focus on skill development alongside your degree.';
-
+  var careersHTML=d.careers.map(c=>`<span class="career-chip">💼 ${c}</span>`).join('');
+  var certsHTML=d.certifications.map(c=>`<span class="career-chip">📜 ${c}</span>`).join('');
+  var pctNote=pct>=75
+    ?'<strong style="color:#4ade80">✅ Your score is strong</strong> — You are eligible for top government and private colleges. Aim for the best.'
+    :pct>=55
+    ?'<strong style="color:#fbbf24">⚠️ Your score is moderate</strong> — Focus on entrance exam preparation. Many private colleges are accessible.'
+    :'<strong style="color:#f87171">⚠️ Score is on the lower side</strong> — Private colleges through management quota are an option. Focus on skill development alongside your degree.';
   return `
     <div class="path-result-card primary" style="margin-bottom:1.5rem">
       <div class="pr-badge">⭐ Recommended Higher Education Path</div>
@@ -966,9 +1144,7 @@ function buildHigherCard(d, pct, budget, base, branch, stream){
         <strong style="color:#94a3b8">Entrance Exam:</strong> ${d.entrance}<br/>
         <strong style="color:#94a3b8">Top Colleges:</strong> ${d.colleges}
       </div>
-      <div style="padding:.8rem 1rem;background:rgba(129,140,248,.06);border:1px solid rgba(129,140,248,.15);border-radius:10px;margin-bottom:1.5rem;font-size:.83rem;color:#e2e8f0;line-height:1.7">
-        ${pctNote}
-      </div>
+      <div style="padding:.8rem 1rem;background:rgba(129,140,248,.06);border:1px solid rgba(129,140,248,.15);border-radius:10px;margin-bottom:1.5rem;font-size:.83rem;color:#e2e8f0;line-height:1.7">${pctNote}</div>
       <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#334155;margin-bottom:1rem">Step-by-Step Roadmap</div>
       <div class="path-steps">${stepsHTML}</div>
       <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06)">
@@ -982,8 +1158,8 @@ function buildHigherCard(d, pct, budget, base, branch, stream){
     </div>`;
 }
 
-function buildDirectCard(d, pct, interests){
-  var jobsHTML = d.jobs.map((j,i)=>`
+function buildDirectCard(d,pct,interests){
+  var jobsHTML=d.jobs.map((j,i)=>`
     <div class="pstep">
       <div class="pstep-num">${i+1}</div>
       <div>
@@ -992,7 +1168,6 @@ function buildDirectCard(d, pct, interests){
         <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:5px">${j.certs.map(c=>`<span class="career-chip" style="font-size:.65rem">📜 ${c}</span>`).join('')}</div>
       </div>
     </div>`).join('');
-
   return `
     <div class="path-result-card primary" style="margin-bottom:1.5rem">
       <div class="pr-badge">💼 Direct Career Options</div>
@@ -1007,28 +1182,40 @@ function buildDirectCard(d, pct, interests){
 }
 
 function buildSummaryCard(){
-  var bg = pathState.base==='diploma' ? (pathState.branch||'cs') : (pathState.stream||'pcm');
-  var goal = pathState.higher==='yes' ? 'Higher Education' : 'Direct Job';
+  var streamLabel=pathState.stream==='pcm'?'Science PCM':pathState.stream==='pcb'?'Science PCB':pathState.stream==='commerce'?'Commerce':'Arts';
+  var eduLabel=pathState.base==='diploma'?'Diploma — '+pathState.branch.toUpperCase():'12th — '+streamLabel;
+  var goalLabel=pathState.higher==='yes'?'Higher Education':'Direct Job';
+  var budgetLabel=pathState.budget==='low'?'Limited':pathState.budget==='medium'?'Medium':'High';
   return `
     <div class="path-result-card secondary" style="border-color:rgba(56,189,248,.15)">
       <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#38bdf8;margin-bottom:1rem">📋 Your Profile Summary</div>
       <div style="font-size:.85rem;color:#475569;line-height:2">
-        <strong style="color:#94a3b8">Education Base:</strong> ${pathState.base==='diploma'?'Diploma — '+pathState.branch.toUpperCase():'12th — '+(pathState.stream==='pcm'?'Science PCM':pathState.stream==='pcb'?'Science PCB':pathState.stream==='commerce'?'Commerce':'Arts')} &nbsp;·&nbsp;
+        <strong style="color:#94a3b8">Education Base:</strong> ${eduLabel} &nbsp;·&nbsp;
         <strong style="color:#94a3b8">Score:</strong> ${pathState.pct}% &nbsp;·&nbsp;
-        <strong style="color:#94a3b8">Goal:</strong> ${goal} &nbsp;·&nbsp;
-        <strong style="color:#94a3b8">Budget:</strong> ${pathState.budget==='low'?'Limited':pathState.budget==='medium'?'Medium':'High'}
+        <strong style="color:#94a3b8">Goal:</strong> ${goalLabel} &nbsp;·&nbsp;
+        <strong style="color:#94a3b8">Budget:</strong> ${budgetLabel}
       </div>
     </div>`;
 }
 
+// ══ RESET FUNCTIONS ══
 function resetAll(){
   document.getElementById('frm').reset();
   document.getElementById('rpage').classList.add('hidden');
-  ['hero-sec','feat-sec','app-sec'].forEach(id=>document.getElementById(id).classList.remove('hidden'));
-  document.querySelectorAll('.pills').forEach(w=>{if(!w.dataset.field)return;w.querySelectorAll('.pill').forEach((p,i)=>p.classList.toggle('on',i===1));document.getElementById(w.dataset.field).value=1;});
-  document.querySelectorAll('.stars').forEach(w=>{document.getElementById(w.dataset.field).value=3;w.querySelectorAll('.star').forEach((s,i)=>{s.classList.toggle('on',i<3);s.style.color=i<3?'#fbbf24':'rgba(255,255,255,.07)'});});
-  document.querySelectorAll('#s1 .icard,#s2 .icard,#s3 .icard,#s4 .icard').forEach(c=>c.classList.remove('sel'));
-  const sl=document.getElementById('personality_score');sl.value=0.5;document.getElementById('pval').textContent='0.50';sl.style.background='linear-gradient(to right,#38bdf8 50%,rgba(255,255,255,.06) 50%)';
+  document.getElementById('app-wrap').style.display='block';
+  document.querySelectorAll('.pills').forEach(w=>{
+    if(!w.dataset.field)return;
+    w.querySelectorAll('.pill').forEach((p,i)=>p.classList.toggle('on',i===1));
+    document.getElementById(w.dataset.field).value=1;
+  });
+  document.querySelectorAll('.stars').forEach(w=>{
+    document.getElementById(w.dataset.field).value=3;
+    w.querySelectorAll('.star').forEach((s,i)=>{s.classList.toggle('on',i<3);s.style.color=i<3?'#fbbf24':'rgba(255,255,255,.07)'});
+  });
+  document.querySelectorAll('#s4 .icard').forEach(c=>c.classList.remove('sel'));
+  const sl=document.getElementById('personality_score');
+  sl.value=0.5;document.getElementById('pval').textContent='0.50';
+  sl.style.background='linear-gradient(to right,#38bdf8 50%,rgba(255,255,255,.06) 50%)';
   document.getElementById('edu_path').value='';
   document.querySelectorAll('#edu-path-pills .pill').forEach(p=>p.classList.remove('on'));
   document.getElementById('diploma-branch-wrap').style.display='none';
@@ -1037,24 +1224,28 @@ function resetAll(){
   document.getElementById('marks-grid').innerHTML='';
   document.getElementById('e_edupath').textContent='';
   switchMode('career');
-  showSec(1);window.scrollTo({top:0,behavior:'smooth'});
+  showSec(1);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function resetPath(){
   document.getElementById('path-result').style.display='none';
   document.getElementById('path-result-content').innerHTML='';
-  ['ps2_diploma','ps2_12th','ps3','ps4_yes','ps4_no'].forEach(id=>document.getElementById(id).classList.add('hidden'));
-  document.getElementById('ps1').classList.remove('hidden');
-  document.getElementById('path-sec').classList.remove('hidden');
-  pathState = {base:'',branch:'',stream:'',pct:0,budget:'medium',higher:'',heChoice:[],ciChoice:[]};
-  document.querySelectorAll('.popt').forEach(p=>p.classList.remove('sel','sel-purple'));
+  pathState={base:'',branch:'',stream:'',pct:0,budget:'medium',higher:'',heChoice:[],ciChoice:[]};
+  // Reset all selections
+  document.querySelectorAll('#path-app .popt').forEach(p=>p.classList.remove('sel','sel-purple'));
   document.querySelectorAll('#path-app .icard').forEach(c=>c.classList.remove('sel'));
   document.querySelectorAll('#path-app input[type="checkbox"]').forEach(cb=>cb.checked=false);
-  document.getElementById('p_pct').value='';
-  document.getElementById('b_pct').style.width='0%';
+  var pctEl=document.getElementById('p_pct');
+  if(pctEl) pctEl.value='';
+  var bPctEl=document.getElementById('b_pct');
+  if(bPctEl) bPctEl.style.width='0%';
+  // Show only step 1
+  hideAllPathSteps();
+  document.getElementById('ps1').classList.remove('hidden');
+  document.getElementById('path-sec').classList.remove('hidden');
   document.getElementById('app-sec').scrollIntoView({behavior:'smooth',block:'start'});
 }
-
 </script>
 </body>
 </html>

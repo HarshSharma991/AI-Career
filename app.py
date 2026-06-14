@@ -6,7 +6,7 @@ Author: Harsh Sharma | A41105222189 | Amity University UP
 
 import json
 import os
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
 
 from preprocessor import InputPreprocessor
 from recommender import CareerRecommender
@@ -28,6 +28,10 @@ with open(os.path.join(BASE, "data/career_requirements.json"), encoding="utf-8")
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route('/google75ecb65dde20fd25.html')
+def google_verification():
+    return send_from_directory('.', 'google75ecb65dde20fd25.html')
 
 @app.route("/health")
 def health():

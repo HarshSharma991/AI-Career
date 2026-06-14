@@ -29,6 +29,14 @@ with open(os.path.join(BASE, "data/career_requirements.json"), encoding="utf-8")
 def index():
     return render_template("index.html")
 
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory('.', 'robots.txt')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('.', 'sitemap.xml')
+
 @app.route('/google75ecb65dde20fd25.html')
 def google_verification():
     return send_from_directory('.', 'google75ecb65dde20fd25.html')
